@@ -30,7 +30,7 @@ async function register(user) {
         <div class="card-body text-white">
           <div class="reg-center flex my-2 flex-col">
             <h2>Sign up</h2>
-            <div class="flex mb-3 justify-center">Using osther methods?</div>
+            <div class="flex mb-3 justify-center">Using other methods?</div>
             <!-- <p>{{ form }}</p> -->
             <div>
               <form class="flex flex-col" @submit.prevent="register(form)">
@@ -44,7 +44,7 @@ async function register(user) {
                 <input type="text" class="input" v-model="form.username" />
 
                 <label for="password" class="space-y-3">Password</label>
-                <input type="password" class="input" autocomplete="off" v-model="form.password" />
+                <input type="password" class="input" v-model="form.password" />
 
                 <label for="password" class="space-y-3">Confirm Password</label>
                 <input

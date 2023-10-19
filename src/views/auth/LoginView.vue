@@ -9,7 +9,7 @@ const form = ref({
 })
 
 async function onLogin(payload) {
-  await axios.post('/login', payload)
+  await axios.post('api/login', payload)
     .then((res) => {
       console.log(res.data)
     })
