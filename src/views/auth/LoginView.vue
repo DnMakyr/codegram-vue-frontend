@@ -1,21 +1,28 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
+import { useAuth } from '@/composables/useAuth.js'
+import { useAuthStore } from '../../stores/auth'
 import axios from 'axios'
-
 const form = ref({
   email: '',
   password: ''
 })
+const { login } = useAuth()
 
-async function onLogin(payload) {
-  await axios.post('/login', payload)
-    .then((res) => {
-      console.log(res.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+const { setUser } = useAuthStore()
+
+const handleLogin = async (form) => {
+  try {
+    await login(form)
+
+    const response = await axios.get('/api/user')
+    const userData = response.data
+
+    setUser(userData)
+  } catch (error) {
+    console.error('Error during login:', error)
+  }
 }
 </script>
 
@@ -26,7 +33,7 @@ async function onLogin(payload) {
         <div class="login-center flex my-2 flex-col">
           <h2>Sign in to Codegram</h2>
           <div>
-            <form class="flex flex-col" @submit.prevent="onLogin(form)">
+            <form class="flex flex-col" @submit.prevent="handleLogin(form)">
               <label for="email" class="space-y-3">Email</label>
               <input type="text" name="email" class="input" v-model="form.email" />
               <label for="password" class="space-y-3">Password</label>
