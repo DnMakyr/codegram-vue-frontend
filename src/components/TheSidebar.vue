@@ -1,5 +1,7 @@
 <script setup>
 import SidebarLink from './SidebarLink.vue'
+import { useAuth } from '../composables/useAuth';
+const logout = useAuth().logout
 </script>
 
 <template>
@@ -31,13 +33,16 @@ import SidebarLink from './SidebarLink.vue'
       <SidebarLink :href="''">
         <img src="/icons/heart.png" class="me-3" alt="" />Notification
       </SidebarLink>
-      <SidebarLink :href="''"
+      <SidebarLink :href="'/profile'"
         ><img
           src=""
           alt=""
           class="rounded-full me-3"
           style="max-width: 24px; object-fit: cover"
         />Profile
+      </SidebarLink>
+      <SidebarLink :href="''" @click="logout">
+        <img src="/icons/logout.png" alt="" class="me-3"/>Logout
       </SidebarLink>
     </div>
   </nav>

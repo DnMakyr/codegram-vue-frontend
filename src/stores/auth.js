@@ -1,27 +1,31 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useAuthStore = defineStore('auth', {
-  state: () => ({
-    user: ref(null)
-  }),
-  getters: {
-    isLoggedIn: (state) => state.user !== null
-  },
-  actions: {
-    setUser(user) {
-      this.user = user
-      this.persistLoginState(user !== null)
-    },
-    persistLoginState(isLoggedIn) {
-      if (isLoggedIn) {
-        sessionStorage.setItem('isLoggedIn', 'true')
-      } else {
-        sessionStorage.removeItem('isLoggedIn')
-      }
-    },
-    logOut() {
-      this.setUser(null)
+export const useAuthStore = defineStore(
+  'auth',
+  () => {
+    const authenticated = ref(false)
+    const user = ref({})
+
+    const isAuthenticated = computed(() => authenticated.value || false)
+    const setUser = computed(() => user.value || {})
+    function logIn(userLogged) {
+      authenticated.value = true
+      user.value = userLogged
     }
+    function logOut() {
+      authenticated.value = false
+      user.value = {}
+    }
+    return {
+      authenticated,
+      isAuthenticated,
+      setUser,
+      logIn,
+      logOut
+    }
+  },
+  {
+    persist: { storage: sessionStorage }
   }
-})
+)

@@ -3,8 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
+
+const store = createPinia()
+store.use(piniaPluginPersistedstate)
 
 axios.defaults.baseURL = 'http://localhost:8000/'
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
@@ -15,7 +19,8 @@ await axios.get('/sanctum/csrf-cookie')
 
 const app = createApp(App)
 
-app.use(createPinia())
+app.use(store)
 app.use(router)
 
 app.mount('#app')
+

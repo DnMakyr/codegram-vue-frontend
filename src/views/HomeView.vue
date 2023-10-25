@@ -7,9 +7,3 @@ import TheWelcome from '../components/TheWelcome.vue'
     <TheWelcome />
   </main>
 </template>
-
-<style>
-body {
-  background: linear-gradient(to right, #667eea 0%, #764ba2 100%);
-}
-</style>
