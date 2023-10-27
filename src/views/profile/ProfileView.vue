@@ -22,7 +22,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <loading-spinner v-if="isLoading"/>
+    <loading-spinner style="padding-left: 10rem" v-if="isLoading"/>
   <div class="container-xl pt-4" style="padding-left: 21.438rem; padding-right: 7rem;" v-else>
     <profile-bio :statistics="statistics" :user="user" :authId="authId" />
     <profile-posts-display :posts="posts" />

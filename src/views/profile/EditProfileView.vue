@@ -2,6 +2,7 @@
 import { onMounted } from 'vue';
 import useProfile from '../../composables/useProfile';
 import EditProfileForm from '../../components/EditProfileForm.vue';
+const { profile, getProfile } = useProfile();
 const props = defineProps({
     id: {
         type: String,
@@ -9,9 +10,9 @@ const props = defineProps({
     }
 })
 onMounted(() => {
-    useProfile().getProfile(props.id)
+  getProfile(props.id)
 })
-const { profile } = useProfile();
+
 </script>
 
 <template>

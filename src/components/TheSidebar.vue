@@ -34,6 +34,9 @@ const authId = useAuthStore().userId
         <img src="/icons/message.png" class="me-3" alt="" />Message
       </SidebarLink>
       <SidebarLink :href="''">
+        <img src="/icons/create.png" class="me-3" alt="" />Create
+      </SidebarLink>
+      <SidebarLink :href="''">
         <img src="/icons/heart.png" class="me-3" alt="" />Notification
       </SidebarLink>
       <SidebarLink :href="`/profile/${authId}`"

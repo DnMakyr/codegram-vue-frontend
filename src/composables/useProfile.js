@@ -33,5 +33,5 @@ export default function useProfile() {
       console.log(err)
     }
   }
-  return { user, statistics, profile, posts, isLoading, getProfile }
+  return { user, statistics, profile, posts, isLoading, getProfile, updateProfile }
 }
