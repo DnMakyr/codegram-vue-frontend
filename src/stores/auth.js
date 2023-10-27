@@ -5,19 +5,20 @@ export const useAuthStore = defineStore(
   'auth',
   () => {
     const authenticated = ref(false)
-    const user = ref({})
+    const userId = ref({})
 
     const isAuthenticated = computed(() => authenticated.value || false)
-    const setUser = computed(() => user.value || {})
+    const setUser = computed(() => userId.value || {})
     function logIn(userLogged) {
       authenticated.value = true
-      user.value = userLogged
+      userId.value = userLogged
     }
     function logOut() {
       authenticated.value = false
-      user.value = {}
+      userId.value = {}
     }
     return {
+      userId,
       authenticated,
       isAuthenticated,
       setUser,

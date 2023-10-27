@@ -1,7 +1,10 @@
 <script setup>
 import SidebarLink from './SidebarLink.vue'
-import { useAuth } from '../composables/useAuth';
+import { useAuth } from '../composables/useAuth'
+import { useAuthStore } from '../stores/auth';
 const logout = useAuth().logout
+const authId = useAuthStore().userId
+
 </script>
 
 <template>
@@ -33,7 +36,7 @@ const logout = useAuth().logout
       <SidebarLink :href="''">
         <img src="/icons/heart.png" class="me-3" alt="" />Notification
       </SidebarLink>
-      <SidebarLink :href="'/profile'"
+      <SidebarLink :href="`/profile/${authId}`"
         ><img
           src=""
           alt=""
@@ -42,18 +45,13 @@ const logout = useAuth().logout
         />Profile
       </SidebarLink>
       <SidebarLink :href="''" @click="logout">
-        <img src="/icons/logout.png" alt="" class="me-3"/>Logout
+        <img src="/icons/logout.png" alt="" class="me-3" />Logout
       </SidebarLink>
     </div>
   </nav>
 </template>
 
 <style scoped>
-@media (min-width: 991.98px) {
-  main {
-    padding-left: 240px;
-  }
-}
 
 /* Sidebar */
 .sidebar {

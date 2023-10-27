@@ -34,10 +34,17 @@ const router = createRouter({
       component: () => import('../views/DashboardView.vue')
     },
     {
-      path: '/profile',
+      path: '/profile/:id',
       name: 'profile',
-      component: () => import('../views/ProfileView.vue')
+      component: () => import('../views/profile/ProfileView.vue'),
+      props: true
     },
+    {
+      path: '/profile/:id/edit',
+      name: 'edit-profile',
+      component: () => import('../views/profile/EditProfileView.vue'),
+      props: true
+    }
   ]
 })
 

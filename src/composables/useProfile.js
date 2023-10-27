@@ -1,16 +1,37 @@
 import axios from 'axios'
 import { ref } from 'vue'
 export default function useProfile() {
+  const user = ref({})
   const profile = ref({})
   const posts = ref({})
+  const statistics = ref({})
+  const isLoading = ref(false)
 
-  const getSelfProfile = async () => {
-    const res = (await axios.get('api/profile/'+1))
-    profile.value = res.data.user.profile
-    console.log(res.data.user.profile)
+  async function getProfile(id) {
+    try {
+      isLoading.value = true
+      const res = await axios.get('api/profile/' + id)
+      user.value = res.data.user
+      statistics.value = {
+        postCount: res.data.postCount,
+        followersCount: res.data.followersCount,
+        followingCount: res.data.followingCount
+      }
+      profile.value = res.data.profile
+      posts.value = res.data.posts
+    } catch (err) {
+      console.log(err)
+    }
+    finally {
+      isLoading.value = false
+    }
   }
-  const getSelfPosts = async () => {
-    posts.value = await axios.get('api/profile/')
+  async function updateProfile(id) {
+    try {
+      await axios.patch(`api/profile/${id}/update`)
+    } catch (err) {
+      console.log(err)
+    }
   }
-  return { profile, getSelfProfile }
+  return { user, statistics, profile, posts, isLoading, getProfile }
 }

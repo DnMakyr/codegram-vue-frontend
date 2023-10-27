@@ -2,6 +2,7 @@
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import { useAuth } from '@/composables/useAuth.js'
+
 const form = ref({
   email: '',
   password: ''

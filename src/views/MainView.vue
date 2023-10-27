@@ -8,12 +8,10 @@ import TheSidebar from '../components/TheSidebar.vue'
 // Initialize isLogin with the value from session storage (if available)
 const isLogin = ref(sessionStorage.getItem('isLogin') === 'true')
 const authStore = useAuthStore()
-
 const navbarComponent = computed(() => {
   return isLogin.value ? TheSidebar : TheNavbar
 })
 
-// Update isLogin and session storage when the authentication state changes
 onMounted(() => {
   watch(
     () => authStore.authenticated,
@@ -27,12 +25,9 @@ onMounted(() => {
 
 <template>
   <component :is="navbarComponent"></component>
-  <Suspense>
-    <template #default>
+  <main>
+    <Suspense>
       <RouterView />
-    </template>
-    <template #fallback>
-      Loading...
-    </template>
-  </Suspense>
+    </Suspense>
+  </main>
 </template>

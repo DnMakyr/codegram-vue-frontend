@@ -4,21 +4,22 @@ import router from '../router'
 import { useAuthStore } from '../stores/auth'
 
 export const useAuth = () => {
-  const user = ref({})
+  const authUserId = ref()
   const authStore = useAuthStore()
-  async function getAuthUser() {
-    try {
-      const res = await axios.get('api/user')
-      user.value = res.data.user
-    } catch (err) {
-      console.log(err)
-    }
-  }
+
+  // async function getAuthUser() {
+  //   try {
+  //     const res = await axios.get('api/user')
+  //     sessionStorage.setItem('authUserId', res.data.user.id)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
   async function login(payload) {
     try {
       await axios.post('api/login', payload)
       router.push('/dashboard')
-      authStore.logIn((await axios.get('api/user')).data)
+      authStore.logIn((await axios.get('api/user')).data.user.id)
     } catch (err) {
       console.log(err)
     }
@@ -35,6 +36,7 @@ export const useAuth = () => {
     axios
       .post('api/logout')
       .then(() => {
+        sessionStorage.removeItem('authUserId')
         authStore.logOut()
         router.push({ name: 'login' })
       })
@@ -43,8 +45,8 @@ export const useAuth = () => {
       })
   }
   return {
-    user,
-    getAuthUser,
+    authUserId,
+    // getAuthUser,
     login,
     register,
     logout
