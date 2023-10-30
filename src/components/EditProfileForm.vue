@@ -20,18 +20,18 @@ const formData = ref({
 
 const { updateProfile } = useProfile()
 
-const submitForm = () => {
-  const fd = new FormData()
-  fd.append('title', formData.value.title)
-  fd.append('description', formData.value.description)
-  fd.append('url', formData.value.url)
-  fd.append('image', formData.value.image)
-  updateProfile(props.id, fd)
-}
+// const submitForm = () => {
+//   const fd = new FormData()
+//   fd.append('title', formData.value.title)
+//   fd.append('description', formData.value.description)
+//   fd.append('url', formData.value.url)
+//   fd.append('image', formData.value.image)
+//   updateProfile(props.id, fd)
+// }
 </script>
 
 <template>
-  <form @submit.prevent="submitForm" enctype="multipart/form-data">
+  <form @submit.prevent="updateProfile(id, formData)" enctype="multipart/form-data">
     <div class="row mb-3">
       <label for="title" class="col-md-4 col-form-label text-md-end">Title</label>
 
@@ -40,7 +40,6 @@ const submitForm = () => {
           id="title"
           type="text"
           class="form-control"
-          name="title"
           v-model="formData.title"
           autocomplete="title"
           autofocus
@@ -55,7 +54,6 @@ const submitForm = () => {
           id="description"
           type="text"
           class="form-control"
-          name="description"
           v-model="formData.description"
           autocomplete="description"
         />
@@ -70,7 +68,6 @@ const submitForm = () => {
           id="url"
           type="text"
           class="form-control"
-          name="url"
           v-model="formData.url"
           autocomplete="url"
         />
@@ -84,7 +81,6 @@ const submitForm = () => {
           accept="image/*"
           class="form-control-file"
           id="image"
-          name="image"
           @change="e => (formData.image = e.target.files[0])"
         />
       </div>
