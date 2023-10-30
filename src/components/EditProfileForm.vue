@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import useProfile from '../composables/useProfile'
+import { ref } from 'vue'
+const props = defineProps({
   profile: {
     type: Object,
     required: true
@@ -9,10 +11,27 @@ defineProps({
     required: true
   }
 })
+const formData = ref({
+  title: props.profile.title,
+  description: props.profile.description,
+  url: props.profile.url,
+  image: null
+})
+
+const { updateProfile } = useProfile()
+
+const submitForm = () => {
+  const fd = new FormData()
+  fd.append('title', formData.value.title)
+  fd.append('description', formData.value.description)
+  fd.append('url', formData.value.url)
+  fd.append('image', formData.value.image)
+  updateProfile(props.id, fd)
+}
 </script>
 
 <template>
-  <form action="" @submit.prevent="">
+  <form @submit.prevent="submitForm" enctype="multipart/form-data">
     <div class="row mb-3">
       <label for="title" class="col-md-4 col-form-label text-md-end">Title</label>
 
@@ -22,7 +41,7 @@ defineProps({
           type="text"
           class="form-control"
           name="title"
-          :value=" profile?.title "
+          v-model="formData.title"
           autocomplete="title"
           autofocus
         />
@@ -37,7 +56,7 @@ defineProps({
           type="text"
           class="form-control"
           name="description"
-          :value=" profile?.description "
+          v-model="formData.description"
           autocomplete="description"
         />
       </div>
@@ -47,7 +66,14 @@ defineProps({
       <label for="url" class="col-md-4 col-form-label text-md-end">Link</label>
 
       <div class="col-md-6">
-        <input id="url" type="text" class="form-control" name="url" :value=" profile?.url " autocomplete="url" />
+        <input
+          id="url"
+          type="text"
+          class="form-control"
+          name="url"
+          v-model="formData.url"
+          autocomplete="url"
+        />
       </div>
     </div>
     <div class="row mb-3">
@@ -55,11 +81,11 @@ defineProps({
       <div class="col-md-6">
         <input
           type="file"
+          accept="image/*"
           class="form-control-file"
           id="image"
           name="image"
-          data-bs-toggle="modal"
-          data-bs-target="#cropModal"
+          @change="e => (formData.image = e.target.files[0])"
         />
       </div>
     </div>

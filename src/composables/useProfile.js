@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ref } from 'vue'
+import router from '../router'
 export default function useProfile() {
   const user = ref({})
   const profile = ref({})
@@ -26,9 +27,11 @@ export default function useProfile() {
       isLoading.value = false
     }
   }
-  async function updateProfile(id) {
+  async function updateProfile(id, data) {
     try {
-      await axios.patch(`api/profile/${id}/update`)
+      await axios.patch(`api/profile/${id}/update`, data).then(() => {
+        router.push('/profile/'+id)
+      })
     } catch (err) {
       console.log(err)
     }
