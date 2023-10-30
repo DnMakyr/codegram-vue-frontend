@@ -1,8 +1,7 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink} from 'vue-router'
 import { ref } from 'vue'
-import axios from 'axios'
-
+import { useAuth } from '../../composables/useAuth';
 const form = ref({
   email: '',
   name: '',
@@ -10,17 +9,8 @@ const form = ref({
   password: '',
   password_confirmation: ''
 })
+const { register } = useAuth()
 
-async function register(user) {
-  await axios
-    .post('/register', user)
-    .then((res) => {
-      console.log(res.data.username + ' created')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-}
 </script>
 
 <template>

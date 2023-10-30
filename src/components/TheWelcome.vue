@@ -2,7 +2,7 @@
 
 <template>
   <div class="fullscreen">
-    <div class="absolute right-20 mt-3 text-white" style="max-width: 400px">
+    <div class="absolute right-20 mt-3 text-black" style="max-width: 400px">
       Welcome to the Codegram! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
       maximus risus ac diam consectetur, id feugiat elit tincidunt. In sit amet purus ligula.
       Praesent ullamcorper diam nibh. Integer vitae porta lectus, eget tempor sem. Curabitur id
