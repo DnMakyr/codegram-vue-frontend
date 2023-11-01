@@ -1,5 +1,5 @@
 <script setup>
-import useProfile from '../composables/useProfile'
+import useProfile from '../../composables/useProfile'
 import { ref } from 'vue'
 const props = defineProps({
   profile: {

@@ -2,8 +2,8 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
-import TheNavbar from '../components/TheNavbar.vue'
-import TheSidebar from '../components/TheSidebar.vue'
+import TheNavbar from '../components/navbar/TheNavbar.vue'
+import TheSidebar from '../components/navbar/TheSidebar.vue'
 
 // Initialize isLogin with the value from session storage (if available)
 const isLogin = ref(sessionStorage.getItem('isLogin') === 'true')

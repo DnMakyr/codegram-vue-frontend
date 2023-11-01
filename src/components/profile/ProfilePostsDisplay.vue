@@ -12,6 +12,6 @@ defineProps({
     <hr>
     <div class="row p-2"></div>
         <div class="row pt-4">
-            <PostFrame v-for="post in posts" :key="post.id" />
+            <PostFrame v-for="post in posts" :key="post.id" :post="post" />
         </div>
 </template>

@@ -1,25 +1,15 @@
-import { ref } from 'vue'
 import axios from 'axios'
 import router from '../router'
 import { useAuthStore } from '../stores/auth'
 
 export const useAuth = () => {
-  const authUserId = ref()
   const authStore = useAuthStore()
 
-  // async function getAuthUser() {
-  //   try {
-  //     const res = await axios.get('api/user')
-  //     sessionStorage.setItem('authUserId', res.data.user.id)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
   async function login(payload) {
     try {
       await axios.post('api/login', payload)
       router.push('/dashboard')
-      authStore.logIn((await axios.get('api/user')).data.user.id)
+      authStore.logIn((await axios.get('api/user')).data)
     } catch (err) {
       console.log(err)
     }
@@ -45,8 +35,6 @@ export const useAuth = () => {
       })
   }
   return {
-    authUserId,
-    // getAuthUser,
     login,
     register,
     logout

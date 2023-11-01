@@ -6,12 +6,13 @@ export const useAuthStore = defineStore(
   () => {
     const authenticated = ref(false)
     const userId = ref({})
-
+    const avatar = ref('')
     const isAuthenticated = computed(() => authenticated.value || false)
     const setUser = computed(() => userId.value || {})
     function logIn(userLogged) {
       authenticated.value = true
-      userId.value = userLogged
+      userId.value = userLogged.user.id
+      avatar.value = userLogged.avatar
     }
     function logOut() {
       authenticated.value = false
@@ -20,6 +21,7 @@ export const useAuthStore = defineStore(
     return {
       userId,
       authenticated,
+      avatar,
       isAuthenticated,
       setUser,
       logIn,

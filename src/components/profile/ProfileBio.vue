@@ -1,5 +1,5 @@
 <script setup>
-import router from '../router';
+import router from '../../router'
 
 defineProps({
   statistics: {
@@ -13,15 +13,22 @@ defineProps({
   authId: {
     type: Number,
     required: true
+  },
+  profile: {
+    type: Object,
+    required: true
   }
 })
-
 </script>
 
 <template>
-  <div class="row">
+  <div class="row" style="max-height: 350px">
     <div class="col-3 p-5">
-      <img src="" alt="avatar" class="avatar w-100 rounded-full" />
+      <img
+        :src="'http://localhost:8000/storage/' + profile.image"
+        alt="avatar"
+        class="avatar rounded-full"
+      />
     </div>
     <div class="col-9 mt-5">
       <div class="d-flex justify-content-between align-items-baseline">
@@ -30,7 +37,9 @@ defineProps({
           <button v-show="authId != user.id">Friend</button>
           <button v-show="authId != user.id">Follow</button>
           <button v-show="authId != user.id">Chat</button>
-          <button class="btn btn-primary" @click="router.push(`/profile/${authId}/edit`)">Edit Profile</button>
+          <button class="btn btn-primary" @click="router.push(`/profile/${authId}/edit`)">
+            Edit Profile
+          </button>
         </div>
       </div>
       <div class="d-flex mt-2">
@@ -53,7 +62,7 @@ defineProps({
           following
         </div>
       </div>
-      <div class="mt-3 fw-bold">{{ user.profile?.title}}</div>
+      <div class="mt-3 fw-bold">{{ user.profile?.title }}</div>
       <div>{{ user.profile?.description }}</div>
       <div>
         <a href="{{ user.profile?.url }}">{{ user.profile?.url }}</a>
@@ -61,3 +70,11 @@ defineProps({
     </div>
   </div>
 </template>
+
+<style scoped>
+.avatar {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+}
+</style>

@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import useProfile from '../../composables/useProfile'
-import EditProfileForm from '../../components/EditProfileForm.vue'
+import EditProfileForm from '../../components/profile/EditProfileForm.vue'
 import LoadingSpinner from '/src/components/LoadingSpinner.Vue'
 
 const { isLoading, profile, getProfile } = useProfile()
@@ -14,6 +14,7 @@ const props = defineProps({
 onMounted(() => {
   getProfile(props.id)
 })
+console.log(profile)
 </script>
 
 <template>

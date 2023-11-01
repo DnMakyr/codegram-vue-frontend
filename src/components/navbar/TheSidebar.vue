@@ -1,10 +1,10 @@
 <script setup>
 import SidebarLink from './SidebarLink.vue'
-import { useAuth } from '../composables/useAuth'
-import { useAuthStore } from '../stores/auth';
+import { useAuth } from '../../composables/useAuth'
+import { useAuthStore } from '../../stores/auth'
 const logout = useAuth().logout
 const authId = useAuthStore().userId
-
+const avatar = useAuthStore().avatar
 </script>
 
 <template>
@@ -41,7 +41,7 @@ const authId = useAuthStore().userId
       </SidebarLink>
       <SidebarLink :href="`/profile/${authId}`"
         ><img
-          src=""
+          :src="'http://localhost:8000' + avatar"
           alt=""
           class="rounded-full me-3"
           style="max-width: 24px; object-fit: cover"
@@ -55,7 +55,6 @@ const authId = useAuthStore().userId
 </template>
 
 <style scoped>
-
 /* Sidebar */
 .sidebar {
   position: fixed;
