@@ -21,35 +21,35 @@ const avatar = useAuthStore().avatar
         <div class="ps-2 pt-1" style="font-size: 20px; font-weight: bold">Codegram</div>
       </div>
 
-      <SidebarLink :href="'/dashboard'">
+      <sidebar-link :href="'/dashboard'">
         <img src="/icons/home.png" alt="home" class="me-3" />Home
-      </SidebarLink>
-      <SidebarLink :href="''">
+      </sidebar-link >
+      <sidebar-link :href="'/explore'">
         <img src="/icons/direction.png" alt="explore" class="me-3" />Explore
-      </SidebarLink>
-      <SidebarLink :href="''">
+      </sidebar-link>
+      <sidebar-link :href="'a'">
         <img src="/icons/search.png" class="me-3" alt="" />Search
-      </SidebarLink>
-      <SidebarLink :href="''">
+      </sidebar-link>
+      <sidebar-link :href="'b'">
         <img src="/icons/message.png" class="me-3" alt="" />Message
-      </SidebarLink>
-      <SidebarLink :href="''">
+      </sidebar-link>
+      <sidebar-link :href="'c'">
         <img src="/icons/create.png" class="me-3" alt="" />Create
-      </SidebarLink>
-      <SidebarLink :href="''">
+      </sidebar-link>
+      <sidebar-link :href="'d'">
         <img src="/icons/heart.png" class="me-3" alt="" />Notification
-      </SidebarLink>
-      <SidebarLink :href="`/profile/${authId}`"
+      </sidebar-link>
+      <sidebar-link :href="`/profile/${authId}`"
         ><img
           :src="'http://localhost:8000' + avatar"
           alt=""
           class="rounded-full me-3"
           style="max-width: 24px; object-fit: cover"
         />Profile
-      </SidebarLink>
-      <SidebarLink :href="''" @click="logout">
+      </sidebar-link>
+      <sidebar-link :href="''" @click.prevent="logout">
         <img src="/icons/logout.png" alt="" class="me-3" />Logout
-      </SidebarLink>
+      </sidebar-link>
     </div>
   </nav>
 </template>
@@ -146,6 +146,7 @@ span.notification-count {
 #notificationSidebar div.card:hover {
   transform: scale(1.05);
   transition: 0.5s;
+  transform-origin: 100% 0;
 }
 
 /* Style for the button that opens the notification sidebar */
@@ -154,7 +155,7 @@ span.notification-count {
 }
 
 /* Adjust the position of the button as needed */
-.isActive {
+.router-link-active {
   font-weight: bold !important;
   color: rgb(212, 65, 65) !important;
   border-style: initial;

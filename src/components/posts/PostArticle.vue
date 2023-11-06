@@ -9,6 +9,7 @@ const props = defineProps({
   },
 })
 provide('post', props.post)
+
 </script>
 
 <template>

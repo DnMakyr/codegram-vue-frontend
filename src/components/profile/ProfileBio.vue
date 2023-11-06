@@ -14,10 +14,10 @@ defineProps({
     type: Number,
     required: true
   },
-  profile: {
-    type: Object,
-    required: true
-  }
+  // profile: {
+  //   type: Object,
+  //   required: true
+  // }
 })
 </script>
 
@@ -25,7 +25,7 @@ defineProps({
   <div class="row" style="max-height: 350px">
     <div class="col-3 p-5">
       <img
-        :src="'http://localhost:8000/storage/' + profile.image"
+        :src="'http://localhost:8000/storage/' + user.profile?.image"
         alt="avatar"
         class="avatar rounded-full"
       />
@@ -37,7 +37,7 @@ defineProps({
           <button v-show="authId != user.id">Friend</button>
           <button v-show="authId != user.id">Follow</button>
           <button v-show="authId != user.id">Chat</button>
-          <button class="btn btn-primary" @click="router.push(`/profile/${authId}/edit`)">
+          <button class="btn btn-primary" v-show="authId === user.id" @click="router.push(`/profile/${authId}/edit`)">
             Edit Profile
           </button>
         </div>

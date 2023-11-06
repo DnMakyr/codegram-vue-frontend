@@ -1,18 +1,30 @@
 <script setup>
 import { inject } from 'vue'
+import router from '../../router'
+const post = inject('post')
 
-const post = inject('post') 
+function toProfile() {
+  router.push(`/profile/${post.user.id}`)
+}
 </script>
 
 <template>
   <div class="header flex items-center pb-3">
-    <div class="align-baseline">
-      <img :src="'http://localhost:8000/storage/'+post.user.profile?.image" alt="avatar" class="avatar" />
+    <div class="align-baseline mr-1 avatar-img" @click="toProfile">
+      <img
+        :src="
+          post.user.profile.image
+            ? 'http://localhost:8000/storage/' + post.user.profile.image
+            : '/temp/avatar.png'
+        "
+        alt="avatar"
+        class="avatar"
+      />
     </div>
-    <div class="flex">
-      <div style="width: 25.8rem">
-        <div class="info flex items-center">
-          <span class="ml-1" style="font-weight: bold">{{post.user?.username}}</span>
+    <div class="flex flex-grow-1">
+      <div>
+        <div class="info flex items-center username" @click="toProfile">
+          <span class="ml-1" style="font-weight: bold">{{ post.user?.username }}</span>
           <!-- <span>•</span>
           <span>time</span> -->
         </div>
@@ -38,5 +50,11 @@ article div span {
   height: 2rem;
   border-radius: 100%;
   border-style: groove;
+}
+.avatar-img:hover {
+  cursor: pointer;
+}
+.username:hover {
+  cursor: pointer;
 }
 </style>

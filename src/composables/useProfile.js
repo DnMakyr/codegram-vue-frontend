@@ -7,7 +7,11 @@ export default function useProfile() {
   const posts = ref({})
   const statistics = ref({})
   const isLoading = ref(false)
-
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data'
+    }
+  }
   async function getProfile(id) {
     try {
       isLoading.value = true
@@ -18,8 +22,8 @@ export default function useProfile() {
         followersCount: res.data.followersCount,
         followingCount: res.data.followingCount
       }
-      profile.value = res.data.profile
-      posts.value = res.data.posts
+      profile.value = res.data.user.profile
+      posts.value = res.data.user.posts
     } catch (err) {
       console.log(err)
     }
@@ -29,7 +33,9 @@ export default function useProfile() {
   }
   async function updateProfile(id, data) {
     try {
-      await axios.patch(`api/profile/${id}/update`, data).then(() => {
+      await axios.post(`api/profile/${id}/update`, data, config, {
+        _method: 'PATCH'
+      }).then(() => {
         router.push('/profile/'+id)
       })
     } catch (err) {

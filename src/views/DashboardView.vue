@@ -16,7 +16,7 @@ provide('likeCount', likeCount)
 
 <template>
   <loading-spinner v-if="isLoading" style="margin-left: 12rem" />
-  <div class="container" style="padding-left: 12rem" v-else>
+  <div class="container" style="padding-left: 14rem" v-else>
     <div class="row mb-4"></div>
     <div class="col-7-md mx-auto">
       <div class="row flex">

@@ -14,7 +14,6 @@ const props = defineProps({
 onMounted(() => {
   getProfile(props.id)
 })
-console.log(profile)
 </script>
 
 <template>
