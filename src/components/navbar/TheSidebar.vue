@@ -44,10 +44,10 @@ const avatar = useAuthStore().avatar
           :src="'http://localhost:8000' + avatar"
           alt=""
           class="rounded-full me-3"
-          style="max-width: 24px; object-fit: cover"
+          style=" width: 24px; height: 24px; object-fit: cover"
         />Profile
       </sidebar-link>
-      <sidebar-link :href="''" @click.prevent="logout">
+      <sidebar-link :href="' '" @click.prevent="logout">
         <img src="/icons/logout.png" alt="" class="me-3" />Logout
       </sidebar-link>
     </div>
