@@ -26,20 +26,23 @@ export default function useProfile() {
       posts.value = res.data.user.posts
     } catch (err) {
       console.log(err)
-    }
-    finally {
+    } finally {
       isLoading.value = false
     }
   }
   async function updateProfile(id, data) {
     try {
-      await axios.post(`api/profile/${id}/update`, data, config, {
-        _method: 'PATCH'
-      }).then(() => {
-        router.push('/profile/'+id)
-      })
+      await axios
+        .post(`api/profile/${id}/update`, data, config, {
+          _method: 'PATCH'
+        })
+        .then(() => {
+          router.push('/profile/' + id)
+        })
     } catch (err) {
-      console.log(err)
+      if (err.response.status === 403) {
+        alert(err.response.data.message)
+      }
     }
   }
   return { user, statistics, profile, posts, isLoading, getProfile, updateProfile }
