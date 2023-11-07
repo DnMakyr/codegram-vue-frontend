@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ref } from 'vue'
 import router from '../router'
+
 export default function useProfile() {
   const user = ref({})
   const profile = ref({})
@@ -37,6 +38,7 @@ export default function useProfile() {
           _method: 'PATCH'
         })
         .then(() => {
+          
           router.push('/profile/' + id)
         })
     } catch (err) {

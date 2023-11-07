@@ -1,10 +1,13 @@
 <script setup>
+import CreatePostForm from '../posts/CreatePostForm.vue'
 import SidebarLink from './SidebarLink.vue'
 import { useAuth } from '../../composables/useAuth'
 import { useAuthStore } from '../../stores/auth'
+
 const logout = useAuth().logout
 const authId = useAuthStore().userId
 const avatar = useAuthStore().avatar
+
 </script>
 
 <template>
@@ -23,7 +26,7 @@ const avatar = useAuthStore().avatar
 
       <sidebar-link :href="'/dashboard'">
         <img src="/icons/home.png" alt="home" class="me-3" />Home
-      </sidebar-link >
+      </sidebar-link>
       <sidebar-link :href="'/explore'">
         <img src="/icons/direction.png" alt="explore" class="me-3" />Explore
       </sidebar-link>
@@ -33,9 +36,10 @@ const avatar = useAuthStore().avatar
       <sidebar-link :href="'b'">
         <img src="/icons/message.png" class="me-3" alt="" />Message
       </sidebar-link>
-      <sidebar-link :href="'c'">
+
+      <button class="create" @click="overlay = !overlay">
         <img src="/icons/create.png" class="me-3" alt="" />Create
-      </sidebar-link>
+      </button>
       <sidebar-link :href="'d'">
         <img src="/icons/heart.png" class="me-3" alt="" />Notification
       </sidebar-link>
@@ -44,7 +48,7 @@ const avatar = useAuthStore().avatar
           :src="'http://localhost:8000' + avatar"
           alt=""
           class="rounded-full me-3"
-          style=" width: 24px; height: 24px; object-fit: cover"
+          style="width: 24px; height: 24px; object-fit: cover"
         />Profile
       </sidebar-link>
       <sidebar-link :href="' '" @click.prevent="logout">
@@ -52,6 +56,7 @@ const avatar = useAuthStore().avatar
       </sidebar-link>
     </div>
   </nav>
+  <create-post-form />
 </template>
 
 <style scoped>
@@ -160,5 +165,30 @@ span.notification-count {
   color: rgb(212, 65, 65) !important;
   border-style: initial;
   border-radius: 5px;
+}
+.create {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 23px;
+  margin-top: 10px;
+  width: 167px;
+  height: 48px;
+  padding: 12px;
+  background-color: #f8fafc;
+  text-align: center;
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.create:hover {
+  filter: brightness(92%);
+  color: rgb(212, 65, 65) !important;
+  border-style: initial;
+  border-radius: 5px;
+  transition: 0.3s;
+  transform: scale(1.05);
 }
 </style>

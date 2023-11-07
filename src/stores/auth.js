@@ -18,6 +18,9 @@ export const useAuthStore = defineStore(
       authenticated.value = false
       userId.value = {}
     }
+    function setAvatar(newAvatar) {
+      avatar.value = newAvatar
+    }
     return {
       userId,
       authenticated,
@@ -25,7 +28,8 @@ export const useAuthStore = defineStore(
       isAuthenticated,
       setUser,
       logIn,
-      logOut
+      logOut,
+      setAvatar
     }
   },
   {

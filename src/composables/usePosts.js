@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ref } from 'vue'
+import router from '../router'
 
 export default function usePosts() {
   const posts = ref({})
@@ -7,6 +8,7 @@ export default function usePosts() {
   const likeCount = ref({})
   const suggestions = ref({})
   const isLoading = ref(false)
+
   async function getDashboard() {
     try {
       isLoading.value = true
@@ -21,5 +23,20 @@ export default function usePosts() {
       isLoading.value = false
     }
   }
-  return { posts, liked, likeCount, suggestions, isLoading, getDashboard }
+  async function createPost(data) {
+    try {
+      await axios
+        .post('api/post', data, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(() => {
+          router.push('/dashboard')
+        })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return { posts, liked, likeCount, suggestions, isLoading, getDashboard, createPost }
 }
