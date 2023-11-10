@@ -1,6 +1,6 @@
 # codegram-frontend
 
-Please use `vue-create` if you want to try this out!
+A social media web application based on Instagram.
 
 ## Recommended IDE Setup
 
