@@ -7,5 +7,6 @@ export default {
   blocklist: [
     'container',
   ],
+  prefix: 'tw-',
   plugins: [],
 }

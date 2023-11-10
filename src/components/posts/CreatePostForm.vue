@@ -19,26 +19,46 @@ function newPost() {
   formData.append('image', data.value.image)
   createPost(formData)
 }
+defineProps({
+  isActive: Boolean
+})
 </script>
 
 <template>
-  <v-overlay class="d-flex align-center justify-center" activator=".create">
-    <v-card class="d-flex justify-center flex-col">
-      <v-card-title class="text-center">Create Post</v-card-title>
-      <v-container style="width: 25rem; height: 22rem; padding-bottom: 10px; overflow-y: auto;">
-        <v-form @submit.prevent="newPost" class="flex flex-col  space-y-3">
-          <v-text-field v-model="data.caption" label="Caption" required hide-details>
-          </v-text-field>
-          <v-file-input
-            @change="selectImage"
-            label="Image"
-            accept="image/*"
-            prepend-icon=""
-          ></v-file-input>
-          <v-img class="self-center" :src="imageUrl" style="object-fit: contain; width: 22rem;"></v-img>
-          <v-btn type="submit" color="primary">Submit</v-btn>
-        </v-form>
-      </v-container>
-    </v-card>
-  </v-overlay>
+  <div v-show="isActive">
+    <div class="container tw-flex tw-justify-center tw-self-center">
+      <div class="row contents tw-fixed tw-mt-3" style="z-index: 2;">
+        <form class="tw-flex tw-flex-col tw-space-y-3" @submit.prevent="newPost">
+          <label for="Caption">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter your caption..."
+              v-model="data.caption"
+            />
+          </label>
+          <input type="file" accept="image/*" placeholder="Image" @change="selectImage" />
+          <button type="submit" @click="!isActive" class="!tw-border-t-slate-950">Create</button>
+          <img :src="imageUrl" alt="" style=" height: 25rem; object-fit: cover;"/>
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.contents {
+  width: 30rem;
+  background-color: white;
+  border: 2px solid rgb(119, 136, 152);
+  border-radius: 5px;
+  color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  margin-top: 20px;
+  transition: margin-top 1s ease-in-out;
+}
+.slide-up,
+.slide-down {
+  overflow: hidden;
+}
+</style>

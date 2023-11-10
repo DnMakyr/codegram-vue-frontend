@@ -25,6 +25,8 @@ onMounted(() => {
   <loading-spinner style="padding-left: 10rem" v-if="isLoading" />
   <div class="container-xl pt-4" style="padding-left: 17.438rem; padding-right: 5rem" v-else>
     <profile-bio :statistics="statistics" :user="user" :authId="authId" />
-    <profile-posts-display :posts="posts" />
+    <keep-alive>
+      <profile-posts-display :posts="posts" />
+    </keep-alive>
   </div>
 </template>

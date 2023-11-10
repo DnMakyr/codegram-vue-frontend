@@ -1,62 +1,64 @@
 <script setup>
-import CreatePostForm from '../posts/CreatePostForm.vue'
+import { ref } from 'vue'
 import SidebarLink from './SidebarLink.vue'
 import { useAuth } from '../../composables/useAuth'
 import { useAuthStore } from '../../stores/auth'
-
+import CreatePostForm from '../posts/CreatePostForm.vue'
 const logout = useAuth().logout
 const authId = useAuthStore().userId
 const avatar = useAuthStore().avatar
-
+const isActive = ref(false)
 </script>
 
 <template>
-  <nav id="sidebarMenu" class="sidebar">
-    <div class="position-sticky">
-      <div id="icon" class="flex">
-        <img
-          src="/svg/codegram.svg"
-          alt="logo"
-          style="height: 45px; border-right: 1px solid #000000"
-          class="pe-2"
-        />
+  <div :key="avatar">
+    <nav id="sidebarMenu" class="sidebar">
+      <div class="tw-position-sticky">
+        <div id="icon" class="tw-flex">
+          <img
+            src="/svg/codegram.svg"
+            alt="logo"
+            style="height: 45px; border-right: 1px solid #000000"
+            class="pe-2"
+          />
 
-        <div class="ps-2 pt-1" style="font-size: 20px; font-weight: bold">Codegram</div>
+          <div class="ps-2 pt-1" style="font-size: 20px; font-weight: bold">Codegram</div>
+        </div>
+
+        <sidebar-link :href="'/dashboard'">
+          <img src="/icons/home.png" alt="home" class="me-3" />Home
+        </sidebar-link>
+        <sidebar-link :href="'/explore'">
+          <img src="/icons/direction.png" alt="explore" class="me-3" />Explore
+        </sidebar-link>
+        <sidebar-link :href="'a'">
+          <img src="/icons/search.png" class="me-3" alt="" />Search
+        </sidebar-link>
+        <sidebar-link :href="'b'">
+          <img src="/icons/message.png" class="me-3" alt="" />Message
+        </sidebar-link>
+
+        <button class="create" @click="isActive = !isActive">
+          <img src="/icons/create.png" class="me-3" alt="" />Create
+        </button>
+        <sidebar-link :href="'d'">
+          <img src="/icons/heart.png" class="me-3" alt="" />Notification
+        </sidebar-link>
+        <sidebar-link :href="`/profile/${authId}`"
+          ><img
+            :src="'http://localhost:8000' + avatar"
+            alt=""
+            class="tw-rounded-full me-3"
+            style="width: 24px; height: 24px; object-fit: cover"
+          />Profile
+        </sidebar-link>
+        <sidebar-link :href="' '" @click.prevent="logout">
+          <img src="/icons/logout.png" alt="" class="me-3" />Logout
+        </sidebar-link>
       </div>
-
-      <sidebar-link :href="'/dashboard'">
-        <img src="/icons/home.png" alt="home" class="me-3" />Home
-      </sidebar-link>
-      <sidebar-link :href="'/explore'">
-        <img src="/icons/direction.png" alt="explore" class="me-3" />Explore
-      </sidebar-link>
-      <sidebar-link :href="'a'">
-        <img src="/icons/search.png" class="me-3" alt="" />Search
-      </sidebar-link>
-      <sidebar-link :href="'b'">
-        <img src="/icons/message.png" class="me-3" alt="" />Message
-      </sidebar-link>
-
-      <button class="create" @click="overlay = !overlay">
-        <img src="/icons/create.png" class="me-3" alt="" />Create
-      </button>
-      <sidebar-link :href="'d'">
-        <img src="/icons/heart.png" class="me-3" alt="" />Notification
-      </sidebar-link>
-      <sidebar-link :href="`/profile/${authId}`"
-        ><img
-          :src="'http://localhost:8000' + avatar"
-          alt=""
-          class="rounded-full me-3"
-          style="width: 24px; height: 24px; object-fit: cover"
-        />Profile
-      </sidebar-link>
-      <sidebar-link :href="' '" @click.prevent="logout">
-        <img src="/icons/logout.png" alt="" class="me-3" />Logout
-      </sidebar-link>
-    </div>
-  </nav>
-  <create-post-form />
+    </nav>
+    <create-post-form :isActive="isActive" />
+  </div>
 </template>
 
 <style scoped>
@@ -181,6 +183,7 @@ span.notification-count {
   font-size: 16px;
   text-decoration: none;
   color: black;
+  border: none;
 }
 
 .create:hover {

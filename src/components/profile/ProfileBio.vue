@@ -1,6 +1,6 @@
 <script setup>
 import router from '../../router'
-
+import FollowButton from './FollowButton.vue';
 defineProps({
   statistics: {
     type: Object,
@@ -14,42 +14,38 @@ defineProps({
     type: Number,
     required: true
   },
-  // profile: {
-  //   type: Object,
-  //   required: true
-  // }
 })
 </script>
 
 <template>
-  <div class="row" style="max-height: 350px">
+  <div class="row" style="max-height: 350px;">
     <div class="col-3 p-5">
       <img
         :src="'http://localhost:8000/storage/' + user.profile?.image"
         alt="avatar"
-        class="avatar rounded-full"
+        class="avatar tw-rounded-full"
       />
     </div>
     <div class="col-9 mt-5">
-      <div class="d-flex justify-content-between align-items-baseline">
+      <div class="tw-flex tw-justify-between tw-align-items-baseline">
         <h2>{{ user.username }}</h2>
-        <div class="d-flex">
+        <div class="tw-flex">
           <button v-show="authId != user.id">Friend</button>
-          <button v-show="authId != user.id">Follow</button>
+          <follow-button v-show="authId != user.id" :user="user"/>
           <button v-show="authId != user.id">Chat</button>
           <button class="btn btn-primary" v-show="authId === user.id" @click="router.push(`/profile/${authId}/edit`)">
             Edit Profile
           </button>
         </div>
       </div>
-      <div class="d-flex mt-2">
-        <div class="mr-3">
+      <div class="tw-flex mt-2">
+        <div class="tw-mr-3">
           <strong
             ><span>{{ statistics?.postCount }}</span></strong
           >
           posts
         </div>
-        <div class="mr-3">
+        <div class="tw-mr-3">
           <strong
             ><span>{{ statistics?.followersCount }}</span></strong
           >
@@ -62,7 +58,7 @@ defineProps({
           following
         </div>
       </div>
-      <div class="mt-3 fw-bold">{{ user.profile?.title }}</div>
+      <div class="mt-3 tw-fw-bold">{{ user.profile?.title }}</div>
       <div>{{ user.profile?.description }}</div>
       <div>
         <a href="{{ user.profile?.url }}">{{ user.profile?.url }}</a>

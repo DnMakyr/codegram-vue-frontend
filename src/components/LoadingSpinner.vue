@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="flex justify-center items-center" style="height: 100vh">
+  <div class="tw-flex tw-justify-center tw-items-center" style="height: 100vh">
     <div class="lds-dual-ring"></div>
   </div>
 </template>

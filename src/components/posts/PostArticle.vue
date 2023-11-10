@@ -13,7 +13,7 @@ provide('post', props.post)
 </script>
 
 <template>
-  <article class="block" style="width: 29.375rem">
+  <article class="tw-block" style="width: 29.375rem">
     <div class="outer">
       <article-header :post="post" />
       <div class="post-image">

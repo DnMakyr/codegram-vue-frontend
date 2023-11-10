@@ -2,7 +2,7 @@
 import CommentButton from '../buttons/CommentButton.vue'
 import LikeButton from '../buttons/LikeButton.vue'
 import DescriptionDiv from './DescriptionDiv.vue'
-import { inject, computed } from 'vue'
+import { inject } from 'vue'
 
 const post = inject('post')
 const likeCount = inject('likeCount')
@@ -11,11 +11,11 @@ const likeCount = inject('likeCount')
 <template>
   <div class="interaction mt-3">
     <div class="row">
-      <div class="col-6 flex space-x-2">
+      <div class="col-6 tw-flex tw-space-x-2">
         <LikeButton />
         <CommentButton />
       </div>
-      <div class="col-6 flex" style="flex-direction: row-reverse">
+      <div class="col-6 tw-flex" style="flex-direction: row-reverse">
         <span><img src="/icons/ribbon.png" alt="" /></span>
       </div>
     </div>

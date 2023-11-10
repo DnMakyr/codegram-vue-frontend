@@ -4,11 +4,10 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <header class="w-full sticky top-0 z-10">
-    <div class="wrapper flex">
-      <nav class="flex justify-between items-center shadow-md">
-        <RouterLink to="/">Home</RouterLink>
+    <div class="wrapper tw-flex">
+      <nav class="tw-flex tw-flex-row-reverse tw-items-center tw-shadow-md">
         <div>
-          <RouterLink to="/login">Sign In</RouterLink>
+          <RouterLink to="/">Sign In</RouterLink>
           <RouterLink to="/register">Sign Up</RouterLink>
         </div>
       </nav>

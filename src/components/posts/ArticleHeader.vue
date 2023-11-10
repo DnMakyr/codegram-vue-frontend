@@ -9,8 +9,8 @@ function toProfile() {
 </script>
 
 <template>
-  <div class="header flex items-center pb-3">
-    <div class="align-baseline mr-1 avatar-img" @click="toProfile">
+  <div class="header tw-flex tw-items-center pb-3">
+    <div class="tw-align-baseline tw-mr-1 avatar-img" @click="toProfile">
       <img
         :src="
           post.user.profile.image
@@ -21,17 +21,17 @@ function toProfile() {
         class="avatar"
       />
     </div>
-    <div class="flex flex-grow-1">
+    <div class="tw-flex tw-grow">
       <div>
-        <div class="info flex items-center username" @click="toProfile">
-          <span class="ml-1" style="font-weight: bold">{{ post.user?.username }}</span>
+        <div class="info tw-flex tw-items-center username" @click="toProfile">
+          <span class="tw-ml-1" style="font-weight: bold">{{ post.user?.username }}</span>
           <!-- <span>•</span>
           <span>time</span> -->
         </div>
         <!-- <div style="font-size: 12px">location</div> -->
       </div>
     </div>
-    <div class="flex more"><img src="/icons/more.png" /></div>
+    <div class="tw-flex more"><img src="/icons/more.png" /></div>
   </div>
 </template>
 

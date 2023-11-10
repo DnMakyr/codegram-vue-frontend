@@ -17,26 +17,26 @@ const { register } = useAuth()
   <div>
     <div class="centered-container">
       <div class="card">
-        <div class="card-body text-white">
-          <div class="reg-center flex my-2 flex-col">
+        <div class="card-body">
+          <div class="reg-center tw-flex tw-my-2 tw-flex-col">
             <h2>Sign up</h2>
-            <div class="flex mb-3 justify-center">Using osther methods?</div>
+            <div class="tw-flex mb-3 tw-justify-center">Using other methods?</div>
             <!-- <p>{{ form }}</p> -->
             <div>
-              <form class="flex flex-col" @submit.prevent="register(form)">
-                <label for="email" class="space-y-3">Email</label>
+              <form class="tw-flex tw-flex-col" @submit.prevent="register(form)">
+                <label for="email" class="tw-space-y-3">Email</label>
                 <input type="email" class="input" v-model="form.email" />
 
-                <label for="name" class="space-y-3">Name</label>
+                <label for="name" class="tw-space-y-3">Name</label>
                 <input type="text" class="input" v-model="form.name" />
 
-                <label for="username" class="space-y-3">Username</label>
+                <label for="username" class="tw-space-y-3">Username</label>
                 <input type="text" class="input" v-model="form.username" />
 
-                <label for="password" class="space-y-3">Password</label>
+                <label for="password" class="tw-space-y-3">Password</label>
                 <input type="password" class="input" autocomplete="off" v-model="form.password" />
 
-                <label for="password" class="space-y-3">Confirm Password</label>
+                <label for="password" class="tw-space-y-3">Confirm Password</label>
                 <input
                   type="password"
                   class="input"
@@ -44,12 +44,12 @@ const { register } = useAuth()
                   v-model="form.password_confirmation"
                 />
 
-                <button class="login-btn mt-4 hover:brightness-90">Sign up</button>
+                <button class="login-btn mt-4 hover:tw-brightness-90 tw-text-white tw-border-0">Sign up</button>
               </form>
             </div>
           </div>
-          <p class="text-center">
-            Already have an account? <RouterLink to="/login">Sign in</RouterLink>
+          <p class="tw-text-center">
+            Already have an account? <RouterLink to="/" class="hover:tw-text-green-400">Sign in</RouterLink>
           </p>
         </div>
       </div>
@@ -105,5 +105,8 @@ label {
   border-radius: 5px;
   font-size: 16px;
   font-weight: bold;
+}
+.card-body{
+  color: white !important;
 }
 </style>

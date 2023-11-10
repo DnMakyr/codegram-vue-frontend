@@ -17,6 +17,7 @@ export const useAuthStore = defineStore(
     function logOut() {
       authenticated.value = false
       userId.value = {}
+      avatar.value = ''
     }
     function setAvatar(newAvatar) {
       avatar.value = newAvatar

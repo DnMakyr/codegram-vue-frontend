@@ -16,7 +16,7 @@ const formData = ref({
   title: props.profile.title,
   description: props.profile.description,
   url: props.profile.url,
-  image: props.profile.image
+  image: null
 })
 
 const { updateProfile } = useProfile()
@@ -71,7 +71,7 @@ function updateData() {
         />
       </div>
     </div>
-    <div class="flex justify-center">
+    <div class="tw-flex tw-justify-center">
       <button type="submit" class="btn btn-primary">Save</button>
     </div>
   </form>
