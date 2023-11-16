@@ -1,6 +1,6 @@
 <script setup>
 import router from '../../router'
-import FollowButton from './FollowButton.vue';
+import FollowButton from './FollowButton.vue'
 defineProps({
   statistics: {
     type: Object,
@@ -13,12 +13,12 @@ defineProps({
   authId: {
     type: Number,
     required: true
-  },
+  }
 })
 </script>
 
 <template>
-  <div class="row" style="max-height: 350px;">
+  <div class="row" style="max-height: 350px">
     <div class="col-3 p-5">
       <img
         :src="'http://localhost:8000/storage/' + user.profile?.image"
@@ -31,9 +31,13 @@ defineProps({
         <h2>{{ user.username }}</h2>
         <div class="tw-flex">
           <button v-show="authId != user.id">Friend</button>
-          <follow-button v-show="authId != user.id" :user="user"/>
+          <follow-button v-show="authId != user.id" :user="user" />
           <button v-show="authId != user.id">Chat</button>
-          <button class="btn btn-primary" v-show="authId === user.id" @click="router.push(`/profile/${authId}/edit`)">
+          <button
+            class="btn btn-primary"
+            v-show="authId === user.id"
+            @click="router.push(`/profile/${authId}/edit`)"
+          >
             Edit Profile
           </button>
         </div>

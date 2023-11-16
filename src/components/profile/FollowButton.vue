@@ -14,10 +14,9 @@ const buttonText = computed(() => {
   return status.value ? 'Following' : 'Follow'
 })
 async function toggleFollow() {
-  await axios.post('/api/follow/' + props.user.id)
-            .then(() => {
-              status.value = !status.value
-            })
+  await axios.post('/api/follow/' + props.user.id).then(() => {
+    status.value = !status.value
+  })
 }
 </script>
 <template>
