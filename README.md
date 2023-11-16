@@ -1,6 +1,6 @@
 # codegram-frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+A social media web application based on Instagram.
 
 ## Recommended IDE Setup
 
