@@ -19,5 +19,6 @@ defineProps({ suggestion: { type: Object, required: true } })
     width: 44px;
     height: 44px;
     border-radius: 100%;
+    object-fit: cover;
 }
 </style>

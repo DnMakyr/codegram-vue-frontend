@@ -7,6 +7,11 @@ export default {
   blocklist: [
     'container',
   ],
+  theme: {
+    fontFamily: {
+      sans: ['Instagram Sans', 'sans-serif'],
+    },
+  },
   prefix: 'tw-',
   plugins: [],
 }

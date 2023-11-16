@@ -2,6 +2,7 @@
 import CommentButton from '../buttons/CommentButton.vue'
 import LikeButton from '../buttons/LikeButton.vue'
 import DescriptionDiv from './DescriptionDiv.vue'
+import CommentForm from './CommentForm.vue'
 import { inject } from 'vue'
 
 const post = inject('post')
@@ -30,7 +31,7 @@ const likeCount = inject('likeCount')
         {{ post.caption }}
       </template>
     </description-div>
-    <div class="mt-1">Comment Form</div>
+    <comment-form/>
     <div class="mt-1">Show Comments</div>
   </div>
 </template>
