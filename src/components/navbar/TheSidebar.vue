@@ -74,7 +74,7 @@ const isActive = ref(false)
     0 2px 10px 0 rgb(0 0 0 / 5%);
   padding-right: 20px;
   width: moz-fit-content;
-  z-index: 600;
+  z-index: 5;
   background-color: #f8fafc;
 }
 

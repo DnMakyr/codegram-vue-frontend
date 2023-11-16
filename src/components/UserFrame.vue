@@ -2,14 +2,14 @@
 import { computed } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import FriendButton from './buttons/FriendButton.vue'
-import FriendUserButton from './buttons/FriendUserButton.vue'
+import RequestedUserButton from './buttons/RequestedUserButton.vue';
 const props = defineProps(['recommendation'])
 const authId = useAuthStore().userId
 const button = computed(() => {
   if ( authId === props.recommendation.friendship?.requester_id || props.recommendation.friendship === null) {
     return FriendButton
   } else if (authId === props.recommendation.friendship?.user_requested_id) {
-    return FriendUserButton
+    return RequestedUserButton
   }
   else {
     return null
@@ -33,7 +33,7 @@ const button = computed(() => {
         />
       </div>
       <div class="card-body tw-flex">
-        <span class="tw-grow tw-font-bold">{{ recommendation.name }}</span>
+        <span class="tw-grow tw-font-semibold">{{ recommendation.name }}</span>
 
         <component :is="button" :recommendation="recommendation"></component>
       </div>

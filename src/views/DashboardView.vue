@@ -4,7 +4,7 @@ import usePosts from '../composables/usePosts'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
 import PostArticle from '@/components/posts/PostArticle.vue'
 import SuggestionDiv from '../components/SuggestionDiv.vue'
-
+import PostOverlay from '../components/posts/PostOverlay.vue'
 const { posts, suggestions, liked, likeCount ,isLoading, getDashboard } = usePosts()
 
 onMounted(() => {
@@ -18,6 +18,7 @@ provide('likeCount', likeCount)
 <template>
   <loading-spinner v-if="isLoading" style="margin-left: 12rem" />
   <div class="container" style="padding-left: 14rem" v-else>
+    <post-overlay />
     <div class="row mb-4"></div>
     <div class="col-7-md mx-auto">
       <div class="row tw-flex">

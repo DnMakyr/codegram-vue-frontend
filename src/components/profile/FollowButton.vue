@@ -20,10 +20,12 @@ async function toggleFollow() {
 }
 </script>
 <template>
-  <button
-    class="tw-mx-2 tw-px-3 tw-rounded-md tw-h-9"
-    :class="status ? 'tw-bg-gray-400 tw-text-white' : 'tw-bg-blue-500 tw-text-white'"
-    v-text="buttonText"
-    @click="toggleFollow"
-  ></button>
+  <div>
+    <button
+      class="tw-mx-2 btn btn-sm"
+      :class="status ? 'btn-outline-secondary' : 'btn btn-outline-primary'"
+      v-text="buttonText"
+      @click="toggleFollow"
+    ></button>
+  </div>
 </template>

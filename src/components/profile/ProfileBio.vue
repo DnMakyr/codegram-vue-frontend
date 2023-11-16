@@ -1,6 +1,7 @@
 <script setup>
 import router from '../../router'
 import FollowButton from './FollowButton.vue'
+import FriendButton from '../buttons/FriendButton.vue'
 defineProps({
   statistics: {
     type: Object,
@@ -29,17 +30,18 @@ defineProps({
     <div class="col-9 mt-5">
       <div class="tw-flex tw-justify-between tw-align-items-baseline">
         <h2>{{ user.username }}</h2>
-        <div class="tw-flex">
-          <button v-show="authId != user.id">Friend</button>
-          <follow-button v-show="authId != user.id" :user="user" />
-          <button v-show="authId != user.id">Chat</button>
-          <button
-            class="btn btn-primary"
-            v-show="authId === user.id"
-            @click="router.push(`/profile/${authId}/edit`)"
-          >
-            Edit Profile
-          </button>
+        <div class="tw-flex tw-items-center">
+          <friend-button v-show="authId !== user.id" :recommendation="user" />
+          <follow-button v-show="authId !== user.id" :user="user" />
+          <div>
+            <button
+              class="btn btn-primary btn-sm"
+              v-show="authId === user.id"
+              @click="router.push(`/profile/${authId}/edit`)"
+            >
+              Edit Profile
+            </button>
+          </div>
         </div>
       </div>
       <div class="tw-flex mt-2">
