@@ -35,7 +35,7 @@ const button = computed(() => {
       <div class="card-body tw-flex">
         <span class="tw-grow tw-font-semibold">{{ recommendation.name }}</span>
 
-        <component :is="button" :recommendation="recommendation"></component>
+        <component :is="button" :user="recommendation"></component>
       </div>
     </div>
   </div>

@@ -2,18 +2,18 @@
 import { ref, computed } from 'vue'
 import axios from 'axios'
 
-const props = defineProps(['recommendation'])
+const props = defineProps(['user'])
 
 const stat = ref(false)
 const resState = ref()
 
 function accept() {
-  axios.post(`api/friend/${props.recommendation.id}/accept`)
+  axios.post(`api/friend/${props.user.id}/accept`)
   stat.value = true
   resState.value = true
 }
 function decline() {
-  axios.post(`api/friend/${props.recommendation.id}/decline`)
+  axios.post(`api/friend/${props.user.id}/decline`)
   stat.value = true
   resState.value = false
 }

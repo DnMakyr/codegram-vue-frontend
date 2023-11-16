@@ -2,13 +2,13 @@
 import axios from 'axios'
 import { ref, computed } from 'vue'
 
-const props = defineProps(['recommendation'])
+const props = defineProps(['user'])
 
 const reqStat = computed(() => {
-  return props.recommendation.friendship && props.recommendation.friendship.status === 'pending'
+  return props.user.friendship && props.user.friendship.status === 'pending'
 })
 const accepted = computed(() => {
-  return props.recommendation.friendship && props.recommendation.friendship.status === 'friend'
+  return props.user.friendship && props.user.friendship.status === 'friend'
 })
 
 // variable for responsive UI
@@ -21,17 +21,17 @@ const buttonText = computed(() => {
 
 function action() {
   if (stat.value) {
-    axios.post(`api/friend/${props.recommendation.id}/cancel`).then(() => {
+    axios.post(`api/friend/${props.user.id}/cancel`).then(() => {
       stat.value = false
     })
   } else {
-    axios.post(`api/friend/${props.recommendation.id}`).then(() => {
+    axios.post(`api/friend/${props.user.id}`).then(() => {
       stat.value = true
     })
   }
 }
 function unfriend() {
-  axios.post(`api/friend/${props.recommendation.id}/unfriend`).then(() => {
+  axios.post(`api/friend/${props.user.id}/unfriend`).then(() => {
     stat.value = false
     friendStat.value = !friendStat.value
   })

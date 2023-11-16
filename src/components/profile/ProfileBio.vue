@@ -2,6 +2,7 @@
 import router from '../../router'
 import FollowButton from './FollowButton.vue'
 import FriendButton from '../buttons/FriendButton.vue'
+
 defineProps({
   statistics: {
     type: Object,
@@ -31,7 +32,7 @@ defineProps({
       <div class="tw-flex tw-justify-between tw-align-items-baseline">
         <h2>{{ user.username }}</h2>
         <div class="tw-flex tw-items-center">
-          <friend-button v-show="authId !== user.id" :recommendation="user" />
+          <friend-button v-show="authId !== user.id" :user="user" />
           <follow-button v-show="authId !== user.id" :user="user" />
           <div>
             <button
