@@ -38,5 +38,21 @@ export default function usePosts() {
       console.log(err)
     }
   }
-  return { posts, liked, likeCount, suggestions, isLoading, getDashboard, createPost }
-}
+    async function postComment(data) {
+      try {
+        await axios.post('api/comment', data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    return {
+      posts,
+      liked,
+      likeCount,
+      suggestions,
+      isLoading,
+      getDashboard,
+      createPost,
+      postComment
+    }
+  }

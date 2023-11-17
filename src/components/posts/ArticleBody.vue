@@ -31,7 +31,7 @@ const likeCount = inject('likeCount')
         {{ post.caption }}
       </template>
     </description-div>
-    <comment-form/>
+    <comment-form :post="post"/>
     <div class="mt-1">Show Comments</div>
   </div>
 </template>

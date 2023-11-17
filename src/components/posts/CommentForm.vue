@@ -1,8 +1,22 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref  } from 'vue';
+import { useAuthStore } from '../../stores/auth';
+import usePosts from '../../composables/usePosts';
 
-const comment = ref('');
-const minRows = 1;
+const commenter = useAuthStore().userId;
+
+const { postComment } = usePosts();
+
+const props = defineProps(['post']);
+
+const formData = ref(
+  {
+    commenter: commenter,
+    post: props.post.id,
+    comment: '',
+  }
+)
+// const minRows = 1;
 const maxRows = 5;
 
 const adjustTextarea = () => {
@@ -24,11 +38,12 @@ const handleEnterKey = (event) => {
 };
 
 const submitForm = () => {
-  if (comment.value.trim() !== '') {
+  if (formData.value.comment.trim() !== '') {
     // Implement your submission logic here
-    console.log('Submit:', comment.value);
+    postComment(formData.value);
+    console.log('Submit:', formData.value.comment);
     // Reset the textarea after submission
-    comment.value = '';
+    formData.value.comment = '';
     adjustTextarea(); // Adjust the textarea height after resetting
   }
 };
@@ -38,7 +53,7 @@ const submitForm = () => {
   <div>
     <form @submit.prevent="submitForm">
       <textarea
-        v-model="comment"
+        v-model="formData.comment"
         @input="adjustTextarea"
         @keydown.enter.prevent="handleEnterKey"
         aria-label="Add a comment..."
