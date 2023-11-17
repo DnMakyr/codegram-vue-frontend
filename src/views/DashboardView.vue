@@ -1,18 +1,15 @@
 <script setup>
-import { onMounted, provide} from 'vue'
+import { onMounted } from 'vue'
 import usePosts from '../composables/usePosts'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
 import PostArticle from '@/components/posts/PostArticle.vue'
 import SuggestionDiv from '../components/SuggestionDiv.vue'
 import PostOverlay from '../components/posts/PostOverlay.vue'
-const { posts, suggestions, liked, likeCount ,isLoading, getDashboard } = usePosts()
+const { posts, suggestions, isLoading, getDashboard } = usePosts()
 
 onMounted(() => {
   getDashboard()
 })
-
-provide('liked', liked)
-provide('likeCount', likeCount)
 </script>
 
 <template>

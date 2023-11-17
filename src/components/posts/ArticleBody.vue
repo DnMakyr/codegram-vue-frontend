@@ -6,7 +6,6 @@ import CommentForm from './CommentForm.vue'
 import { inject } from 'vue'
 
 const post = inject('post')
-const likeCount = inject('likeCount')
 </script>
 
 <template>
@@ -20,8 +19,8 @@ const likeCount = inject('likeCount')
         <span><img src="/icons/ribbon.png" alt="" /></span>
       </div>
     </div>
-    <div class="mt-2" style="font-size: 14px; font-weight: bold" v-show="likeCount[post.id] > 0">
-      <span>{{ likeCount[post.id] }}</span> {{ likeCount[post.id] === 1 ? 'like' : 'likes' }}
+    <div class="mt-2" style="font-size: 14px; font-weight: bold" v-show="post.likeCount> 0">
+      <span>{{ post.likeCount }}</span> {{ post.likeCount === 1 ? 'like' : 'likes' }}
     </div>
     <description-div>
       <template v-slot:username>
