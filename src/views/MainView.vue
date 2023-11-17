@@ -22,8 +22,6 @@ const authStore = useAuthStore()
 const nav = computed(() => {
   return isLogin.value ? TheSidebar : TheNavbar
 })
-
-console.log(isLogin.value)
 </script>
 
 <template>
