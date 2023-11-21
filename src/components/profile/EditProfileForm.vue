@@ -30,7 +30,6 @@ function updateData() {
   data.append('description', formData.value.description)
   data.append('url', formData.value.url)
   data.append('image', formData.value.image)
-  auth().setAvatar(JSON.stringify(formData.value.image))
   updateProfile(props.id, data)
 }
 </script>

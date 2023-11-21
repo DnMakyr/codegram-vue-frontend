@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ref } from 'vue'
 import router from '../router'
+import { useAuthStore } from '../stores/auth'
 
 export default function useProfile() {
   const user = ref({})
@@ -37,8 +38,8 @@ export default function useProfile() {
         .post(`api/profile/${id}/update`, data, config, {
           _method: 'PATCH'
         })
-        .then(() => {
-          
+        .then((res) => {
+          useAuthStore().setAvatar(res.data.newAvatar)
           router.push('/profile/' + id)
         })
     } catch (err) {

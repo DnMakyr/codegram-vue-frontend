@@ -52,9 +52,9 @@ const isActive = ref(false)
             style="width: 24px; height: 24px; object-fit: cover"
           />Profile
         </sidebar-link>
-        <sidebar-link :href="' '" @click.prevent="logout">
+        <button @click.prevent="logout">
           <img src="/icons/logout.png" alt="" class="me-3" />Logout
-        </sidebar-link>
+        </button>
       </div>
     </nav>
     <create-post-form :isActive="isActive" />
@@ -109,22 +109,11 @@ const isActive = ref(false)
   margin: 30px 0px 30px 16px;
 }
 
-/* .nav-auth a {
-    text-decoration: none;
-    font-size: 16px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-        sans-serif;
-} */
 .nav-auth#logout {
   position: fixed;
   bottom: 0;
   margin-bottom: 20px;
 }
-/* .nav-link {
-    display: flex; 
-    align-items: center;
-} */
 span.notification-count {
   margin-left: 7px;
   padding: 0px 2px;
@@ -168,7 +157,7 @@ span.notification-count {
   border-style: initial;
   border-radius: 5px;
 }
-.create {
+button {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -186,7 +175,7 @@ span.notification-count {
   border: none;
 }
 
-.create:hover {
+button:hover {
   filter: brightness(92%);
   color: rgb(212, 65, 65) !important;
   border-style: initial;
