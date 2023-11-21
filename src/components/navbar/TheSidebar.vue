@@ -34,7 +34,7 @@ const isActive = ref(false)
         <sidebar-link :href="'a'">
           <img src="/icons/search.png" class="me-3" alt="" />Search
         </sidebar-link>
-        <sidebar-link :href="'b'">
+        <sidebar-link :href="'/chat'">
           <img src="/icons/message.png" class="me-3" alt="" />Message
         </sidebar-link>
 

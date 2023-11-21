@@ -22,7 +22,7 @@ async function toggleFollow() {
 <template>
   <div>
     <button
-      class="tw-mx-2 btn btn-sm"
+      class="btn btn-sm"
       :class="status ? 'btn-outline-secondary' : 'btn btn-outline-primary'"
       v-text="buttonText"
       @click="toggleFollow"
