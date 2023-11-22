@@ -7,16 +7,6 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
-// import 'vuetify/styles'
-// import { createVuetify } from 'vuetify'
-// import * as components from 'vuetify/components'
-// import * as directives from 'vuetify/directives'
-
-// const vuetify = createVuetify({
-//   components,
-//   directives,
-// })
-
 
 const store = createPinia()
 store.use(piniaPluginPersistedstate)
@@ -28,11 +18,22 @@ axios.defaults.headers.common['Accept'] = ['application/json', 'multipart/form-d
 axios.defaults.withCredentials = true
 await axios.get('/sanctum/csrf-cookie')
 
-const app = createApp(App)
+import Echo from 'laravel-echo'
 
-// app.use(vuetify)
+import Pusher from 'pusher-js'
+window.Pusher = Pusher
+
+window.Echo = new Echo({
+  broadcaster: 'pusher',
+  key: 'ec1add393a7b068d96be',
+  cluster: 'ap1',
+  forceTLS: true
+})
+
+Pusher.logToConsole = true
+
+const app = createApp(App)
 app.use(store)
 app.use(router)
 
 app.mount('#app')
-

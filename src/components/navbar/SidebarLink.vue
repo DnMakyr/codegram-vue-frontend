@@ -19,7 +19,6 @@ defineProps({
   flex-wrap: wrap;
   align-items: center;
   margin-left: 23px;
-  margin-top: 10px;
   width: 167px;
   height: 48px;
   padding: 12px;

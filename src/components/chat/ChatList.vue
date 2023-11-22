@@ -1,33 +1,23 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useChat } from '../../composables/useChat'
-import { useAuthStore } from '../../stores/auth'
+defineProps(['chats', 'receiverNames', 'avatars'])
+const emit = defineEmits(['openChat'])
 
-const authId = useAuthStore().userId
-const { chats, getChats } = useChat()
-
-onMounted(async () => {
-  console.log('mounted')
-
-  // Fetch chats and wait for them to be populated
-  await getChats()
-
-  // Now, check if chats.value is an array before using map
-
-  chats.value.map((chat) => {
-    if (chat.participant_1.id == authId) {
-      console.log(chat.participant_1.username)
-    }
-  })
-})
+function openChat(id) {
+  emit('openChat', id)
+}
 </script>
 <template>
   <div class="card">
     <div class="card-header">Chat List</div>
-    <div class="card-body tw-space-y-3">
-      <div class="tw-flex tw-items-center" v-for="chat in chats" :key="chat.id">
-        <img :src="'http://localhost:8000/storage/'+ chat.participant_2.profile.image" alt="">
-        <div >{{ chat.participant_2.name }}</div>
+    <div class="card-body tw-space-y-3 tw-overflow-y-auto">
+      <div
+        class="tw-flex tw-items-center user"
+        v-for="(chat, index) in chats"
+        :key="chat.id"
+        @click="openChat(chat.id)"
+      >
+        <img :src="'http://localhost:8000/storage/' + avatars[index]" alt="" />
+        <span>{{ receiverNames[index] }}</span>
       </div>
     </div>
   </div>
@@ -46,9 +36,17 @@ onMounted(async () => {
   height: 85vh;
 }
 img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    margin-right: 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.user {
+  padding: 8px;
+  border-radius: 5px;
+}
+.user:hover {
+  background-color: #e9ecef;
+  cursor: pointer;
 }
 </style>

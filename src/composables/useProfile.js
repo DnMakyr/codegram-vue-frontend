@@ -46,6 +46,9 @@ export default function useProfile() {
       if (err.response.status === 403) {
         alert(err.response.data.message)
       }
+      else {
+        console.log(err)
+      }
     }
   }
   return { user, statistics, profile, posts, isLoading, getProfile, updateProfile }

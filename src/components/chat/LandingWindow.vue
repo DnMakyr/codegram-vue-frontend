@@ -35,7 +35,7 @@ const closeModal = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    border-radius: 100px;
     background-color: #e9ecef;
     img {
       width: 5rem;

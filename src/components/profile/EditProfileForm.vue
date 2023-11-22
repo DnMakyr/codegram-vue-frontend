@@ -1,7 +1,6 @@
 <script setup>
 import useProfile from '../../composables/useProfile'
 import { ref } from 'vue'
-import { useAuthStore as auth } from '../../stores/auth';
 const props = defineProps({
   profile: {
     type: Object,

@@ -1,19 +1,33 @@
-import { ref } from "vue";
-import axios from "axios";
+import { ref } from 'vue'
+import axios from 'axios'
 
 export const useChat = () => {
-    const chats = ref({});
-    const isLoading = ref(false);
-    async function getChats() {
-        try {
-            isLoading.value = true;
-            const res = await axios.get("/api/chat");
-            chats.value = res.data.conversations;
-        } catch (err) {
-            console.log(err);
-        } finally {
-            isLoading.value = false;
-        }
+  const chats = ref({})
+  const messages = ref({})
+  const isLoading = ref(false)
+  const replier = ref({})
+  async function getChats() {
+    try {
+      isLoading.value = true
+      const res = await axios.get('/api/chat')
+      chats.value = res.data.conversations
+    } catch (err) {
+      console.log(err)
+    } finally {
+      isLoading.value = false
     }
-    return { chats, isLoading, getChats };
+  }
+  async function getMessages(id) {
+    try {
+      isLoading.value = true
+      const res = await axios.post(`/api/chat/load/${id}`)
+      messages.value = res.data.messages
+      replier.value = res.data.replier
+    } catch (err) {
+      console.log(err)
+    } finally {
+      isLoading.value = false
+    }
+  }
+  return { chats, isLoading, messages, replier, getChats, getMessages }
 }

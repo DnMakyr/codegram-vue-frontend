@@ -11,9 +11,9 @@ const isActive = ref(false)
 </script>
 
 <template>
-  <div :key="avatar">
+  <div>
     <nav id="sidebarMenu" class="sidebar">
-      <div class="tw-position-sticky">
+      <div class="tw-position-sticky tw-space-y-3">
         <div id="icon" class="tw-flex">
           <img
             src="/svg/codegram.svg"
@@ -41,18 +41,20 @@ const isActive = ref(false)
         <button class="create" @click="isActive = !isActive">
           <img src="/icons/create.png" class="me-3" alt="" />Create
         </button>
+
         <sidebar-link :href="'d'">
           <img src="/icons/heart.png" class="me-3" alt="" />Notification
         </sidebar-link>
-        <sidebar-link :href="`/profile/${authId}`"
-          ><img
+
+        <sidebar-link :href="`/profile/${authId}`">
+          <img
             :src="'http://localhost:8000' + avatar"
             alt=""
             class="tw-rounded-full me-3"
             style="width: 24px; height: 24px; object-fit: cover"
           />Profile
         </sidebar-link>
-        <button @click.prevent="logout">
+        <button class="logout" @click.prevent="logout">
           <img src="/icons/logout.png" alt="" class="me-3" />Logout
         </button>
       </div>
@@ -78,9 +80,10 @@ const isActive = ref(false)
   background-color: #f8fafc;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 400px) {
   .sidebar {
-    width: 100%;
+    width: 0%;
+    display: none;
   }
 }
 .sidebar .active {
@@ -163,7 +166,6 @@ button {
   flex-wrap: wrap;
   align-items: center;
   margin-left: 23px;
-  margin-top: 10px;
   width: 167px;
   height: 48px;
   padding: 12px;
@@ -182,5 +184,9 @@ button:hover {
   border-radius: 5px;
   transition: 0.3s;
   transform: scale(1.05);
+}
+.logout {
+  position: static;
+  bottom: 15px;
 }
 </style>
