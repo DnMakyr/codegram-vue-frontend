@@ -50,6 +50,7 @@ article div span {
   height: 2rem;
   border-radius: 100%;
   border-style: groove;
+  object-fit: cover;
 }
 .avatar-img:hover {
   cursor: pointer;

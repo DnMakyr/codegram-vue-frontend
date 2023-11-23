@@ -16,7 +16,7 @@ function openChat(id) {
         :key="chat.id"
         @click="openChat(chat.id)"
       >
-        <img :src="'http://localhost:8000/storage/' + avatars[index]" alt="" />
+        <img :src="'http://localhost:8000/storage/' + avatars[index]" alt="avatar" />
         <span>{{ receiverNames[index] }}</span>
       </div>
     </div>
@@ -40,6 +40,7 @@ img {
   height: 45px;
   border-radius: 50%;
   margin-right: 10px;
+  object-fit: cover;
 }
 .user {
   padding: 8px;

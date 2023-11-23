@@ -29,5 +29,12 @@ export const useChat = () => {
       isLoading.value = false
     }
   }
-  return { chats, isLoading, messages, replier, getChats, getMessages }
+  async function sendMessage(data) {
+    try {
+      await axios.post(`/api/chat/send/`, data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return { chats, isLoading, messages, replier, getChats, getMessages, sendMessage }
 }

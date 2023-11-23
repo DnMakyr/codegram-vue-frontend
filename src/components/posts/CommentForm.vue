@@ -1,52 +1,48 @@
 <script setup>
-import { ref  } from 'vue';
-import { useAuthStore } from '../../stores/auth';
-import usePosts from '../../composables/usePosts';
+import { ref } from 'vue'
+import { useAuthStore } from '../../stores/auth'
+import usePosts from '../../composables/usePosts'
 
-const commenter = useAuthStore().userId;
+const commenter = useAuthStore().userId
 
-const { postComment } = usePosts();
+const { postComment } = usePosts()
 
-const props = defineProps(['post']);
+const props = defineProps(['post'])
 
-const formData = ref(
-  {
-    commenter: commenter,
-    post: props.post.id,
-    comment: '',
-  }
-)
+const formData = ref({
+  commenter: commenter,
+  post: props.post.id,
+  comment: ''
+})
 // const minRows = 1;
-const maxRows = 5;
+const maxRows = 5
 
 const adjustTextarea = () => {
-  const textarea = document.getElementById('commentTextarea');
-  textarea.style.height = 'auto';
-  textarea.style.height = `${Math.min(textarea.scrollHeight, maxRows * 20)}px`;
-};
+  const textarea = document.getElementById('commentTextarea')
+  textarea.style.height = 'auto'
+  textarea.style.height = `${Math.min(textarea.scrollHeight, maxRows * 20)}px`
+}
 
 const handleEnterKey = (event) => {
   if (event.shiftKey) {
     // If Shift key is pressed along with Enter, insert a newline character
-    document.getElementById('commentTextarea').value += '\n';
+    document.getElementById('commentTextarea').value += '\n'
     // Adjust the textarea height after inserting a newline character
-    adjustTextarea();
+    adjustTextarea()
   } else {
     // Otherwise, submit the form
-    submitForm();
+    submitForm()
   }
-};
+}
 
 const submitForm = () => {
-  if (formData.value.comment.trim() !== '') {
-    // Implement your submission logic here
-    postComment(formData.value);
-    console.log('Submit:', formData.value.comment);
-    // Reset the textarea after submission
-    formData.value.comment = '';
-    adjustTextarea(); // Adjust the textarea height after resetting
+  if (formData.value.comment.trim()) {
+    postComment(formData.value)
+    console.log('Submit:', formData.value.comment)
+    formData.value.comment = ''
+    adjustTextarea() // Adjust the textarea height after resetting
   }
-};
+}
 </script>
 
 <template>

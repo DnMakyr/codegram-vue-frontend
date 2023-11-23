@@ -1,6 +1,5 @@
 <script setup>
-import { ref } from 'vue'
-import { onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useChat } from '../composables/useChat'
 import { useAuthStore } from '../stores/auth'
 import ChatWindow from '../components/chat/ChatWindow.vue'
@@ -33,7 +32,6 @@ onMounted(async () => {
 function openChat(id) {
   isOpen.value = true
   currentChatId.value = id
-  console.log(id)
 }
 </script>
 

@@ -9,6 +9,9 @@ const { posts, suggestions, isLoading, getDashboard } = usePosts()
 
 onMounted(() => {
   getDashboard()
+  window.Echo.channel('notification').listen('.notification', (e) => {
+    console.log(e)
+  })
 })
 </script>
 
