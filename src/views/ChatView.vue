@@ -5,11 +5,12 @@ import { useAuthStore } from '../stores/auth'
 import ChatWindow from '../components/chat/ChatWindow.vue'
 import ChatList from '../components/chat/ChatList.vue'
 import LandingWindow from '../components/chat/LandingWindow.vue'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 const isOpen = ref(false)
 const currentChatId = ref(null)
 const authId = useAuthStore().userId
-const { chats, getChats } = useChat()
+const { chats, isLoading, getChats } = useChat()
 const receiverNames = ref([])
 const avatars = ref([])
 onMounted(async () => {
@@ -39,7 +40,9 @@ function openChat(id) {
   <div class="container">
     <div class="row">
       <div class="col-3">
+        <loading-spinner v-if="isLoading" />
         <chat-list
+          v-else
           :chats="chats"
           :receiverNames="receiverNames"
           :avatars="avatars"
