@@ -45,7 +45,7 @@ const submitForm = () => {
 }
 </script>
 
-<template>
+<template v-once>
   <div>
     <form @submit.prevent="submitForm">
       <textarea

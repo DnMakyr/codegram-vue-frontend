@@ -4,14 +4,23 @@ import SidebarLink from './SidebarLink.vue'
 import { useAuth } from '../../composables/useAuth'
 import { useAuthStore } from '../../stores/auth'
 import CreatePostForm from '../posts/CreatePostForm.vue'
+import NotificationSidebar from '../notification/NotificationSidebar.vue'
 const logout = useAuth().logout
 const authId = useAuthStore().userId
 const avatar = useAuthStore().avatar
 const isActive = ref(false)
+
+const isShown = ref(false)
+function showNoti() {
+  isShown.value = !isShown.value
+}
+function getCount(count) {
+  console.log(count)
+}
 </script>
 
 <template>
-  <div>
+  <div @getCount="getCount">
     <nav id="sidebarMenu" class="sidebar">
       <div class="tw-position-sticky tw-space-y-3">
         <div id="icon" class="tw-flex">
@@ -26,25 +35,25 @@ const isActive = ref(false)
         </div>
 
         <sidebar-link :href="'/dashboard'">
-          <img src="/icons/home.png" alt="home" class="me-3" />Home
+          <img src="/icons/home.png" alt="home" class="me-3" /><span>Home</span>
         </sidebar-link>
         <sidebar-link :href="'/explore'">
-          <img src="/icons/direction.png" alt="explore" class="me-3" />Explore
+          <img src="/icons/direction.png" alt="explore" class="me-3" /><span>Explore</span>
         </sidebar-link>
         <sidebar-link :href="'a'">
-          <img src="/icons/search.png" class="me-3" alt="" />Search
+          <img src="/icons/search.png" class="me-3" alt="" /><span>Search</span>
         </sidebar-link>
         <sidebar-link :href="'/chat'">
-          <img src="/icons/message.png" class="me-3" alt="" />Message
+          <img src="/icons/message.png" class="me-3" alt="" /><span>Message</span>
         </sidebar-link>
 
         <button class="create" @click="isActive = !isActive">
-          <img src="/icons/create.png" class="me-3" alt="" />Create
+          <img src="/icons/create.png" class="me-3" alt="" /><span>Create</span>
         </button>
 
-        <sidebar-link :href="'d'">
-          <img src="/icons/heart.png" class="me-3" alt="" />Notification
-        </sidebar-link>
+        <button @click="showNoti">
+          <img src="/icons/heart.png" class="me-3" alt="" /> <span>Notification</span>
+        </button>
 
         <sidebar-link :href="`/profile/${authId}`">
           <img
@@ -52,11 +61,12 @@ const isActive = ref(false)
             alt=""
             class="tw-rounded-full me-3"
             style="width: 24px; height: 24px; object-fit: cover"
-          />Profile
+          /><span>Profile</span>
         </sidebar-link>
         <button class="logout" @click.prevent="logout">
-          <img src="/icons/logout.png" alt="" class="me-3" />Logout
+          <img src="/icons/logout.png" alt="" class="me-3" /> <span>Logout</span>
         </button>
+        <notification-sidebar :isShown="isShown" />
       </div>
     </nav>
     <create-post-form :isActive="isActive" />
@@ -80,10 +90,9 @@ const isActive = ref(false)
   background-color: #f8fafc;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
   .sidebar {
-    width: 0%;
-    display: none;
+    display: none !important;
   }
 }
 .sidebar .active {

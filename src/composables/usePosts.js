@@ -34,19 +34,19 @@ export default function usePosts() {
       console.log(err)
     }
   }
-    async function postComment(data) {
-      try {
-        await axios.post('api/comment', data)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    return {
-      posts,
-      suggestions,
-      isLoading,
-      getDashboard,
-      createPost,
-      postComment
+  async function postComment(data) {
+    try {
+      await axios.post('api/comment', data)
+    } catch (err) {
+      console.log(err)
     }
   }
+  return {
+    posts,
+    suggestions,
+    isLoading,
+    getDashboard,
+    createPost,
+    postComment
+  }
+}

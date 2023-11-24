@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useChat } from '../../composables/useChat'
-import LoadingSpinner from '../LoadingSpinner.vue'
+import LoadingBar from '../LoadingBar.vue'
 import ChatContainer from './ChatContainer.vue'
 import ChatInput from './ChatInput.vue'
 const props = defineProps({
@@ -24,7 +24,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <loading-spinner v-if="isLoading" style="padding-bottom: 30px" />
+  <loading-bar v-if="isLoading" />
   <div class="card" v-else>
     <div class="card-header">
       <div class="tw-flex tw-space-x-1">

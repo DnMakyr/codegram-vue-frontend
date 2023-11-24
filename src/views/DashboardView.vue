@@ -1,12 +1,10 @@
 <script setup>
 import { onMounted } from 'vue'
 import usePosts from '../composables/usePosts'
-import LoadingSpinner from '../components/LoadingSpinner.vue'
+import LoadingBar from '../components/LoadingBar.vue'
 import PostArticle from '@/components/posts/PostArticle.vue'
 import SuggestionDiv from '../components/SuggestionDiv.vue'
-
 const { posts, suggestions, isLoading, getDashboard } = usePosts()
-
 onMounted(() => {
   getDashboard()
   window.Echo.channel('notification').listen('.notification', (e) => {
@@ -16,7 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <loading-spinner v-if="isLoading" style="margin-left: 12rem" />
+  <loading-bar v-if="isLoading" />
   <div class="container" style="padding-left: 14rem" v-else>
     <div class="row mb-4"></div>
     <div class="col-7-md mx-auto">

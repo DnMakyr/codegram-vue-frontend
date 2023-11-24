@@ -18,7 +18,7 @@ function newPost(){
 </script>
 
 <template>
-  <div class="container" style="padding-left: 13rem; z-index: 10000;">
+  <div class="container" style="padding-left: 13rem; z-index: 10;">
     <div class="row">
       <div class="col-6">
         <form @submit.prevent="newPost" enctype="multipart/form-data">

@@ -2,8 +2,7 @@
 import { onMounted } from 'vue'
 import useProfile from '../../composables/useProfile'
 import EditProfileForm from '../../components/profile/EditProfileForm.vue'
-import LoadingSpinner from '/src/components/LoadingSpinner.Vue'
-
+import LoadingBar from '../../components/LoadingBar.vue';
 const { isLoading, profile, getProfile } = useProfile()
 const props = defineProps({
   id: {
@@ -17,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <loading-spinner style="padding-left: 10rem" v-if="isLoading" />
+  <loading-bar v-if="isLoading" />
   <div class="row pt-5 justify-content-center" style="margin-left: 12rem" v-else>
     <div class="col-md-8">
       <div class="card">

@@ -1,11 +1,11 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useChat } from '../composables/useChat'
 import { useAuthStore } from '../stores/auth'
 import ChatWindow from '../components/chat/ChatWindow.vue'
 import ChatList from '../components/chat/ChatList.vue'
 import LandingWindow from '../components/chat/LandingWindow.vue'
-import LoadingSpinner from '../components/LoadingSpinner.vue'
+import LoadingBar from '../components/LoadingBar.vue'
 
 const isOpen = ref(false)
 const currentChatId = ref(null)
@@ -40,7 +40,7 @@ function openChat(id) {
   <div class="container">
     <div class="row">
       <div class="col-3">
-        <loading-spinner v-if="isLoading" />
+        <loading-bar v-if="isLoading" />
         <chat-list
           v-else
           :chats="chats"
