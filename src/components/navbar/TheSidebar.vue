@@ -66,7 +66,7 @@ function getCount(count) {
         <button class="logout" @click.prevent="logout">
           <img src="/icons/logout.png" alt="" class="me-3" /> <span>Logout</span>
         </button>
-        <notification-sidebar :isShown="isShown" />
+        <notification-sidebar v-if="isShown" />
       </div>
     </nav>
     <create-post-form :isActive="isActive" />

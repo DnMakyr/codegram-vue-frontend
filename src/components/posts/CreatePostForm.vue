@@ -25,7 +25,7 @@ defineProps({
 </script>
 
 <template>
-  <div v-show="isActive">
+  <div class="tw-w-full tw-h-full tw-bg-slate-500" v-show="isActive">
     <div class="container tw-flex tw-justify-center tw-self-center">
       <div class="row contents tw-fixed tw-mt-3" style="z-index: 2;">
         <form class="tw-flex tw-flex-col tw-space-y-3" @submit.prevent="newPost">

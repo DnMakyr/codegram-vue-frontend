@@ -25,7 +25,7 @@
   left: -4px;
 }
 .loader .loaderBar {
-  z-index: 6;
+  z-index: 10;
   position: absolute;
   border-radius: 10px;
   top: 0;

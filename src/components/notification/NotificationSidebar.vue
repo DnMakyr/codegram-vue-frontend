@@ -1,8 +1,10 @@
 <script setup>
 import { onMounted } from 'vue'
 import useNotifcations from '../../composables/useNotifications'
+import NotificationRow from './NotificationRow.vue'
+import LoadingBar from '../LoadingBar.vue'
 
-const { notifications, unreadCount, getNotifications } = useNotifcations()
+const { isLoading, notifications, unreadCount, getNotifications } = useNotifcations()
 
 const unreadNotiCount = unreadCount.value
 
@@ -18,12 +20,10 @@ onMounted(() => {
 })
 </script>
 <template>
-  <transition>
-    <div id="collapsible-div" class="tw-overflow-y-auto" v-if="isShown">
-      <!-- Content goes here -->
-      <p>{{ notifications }}</p>
+    <div id="collapsible-div" class="tw-overflow-y-auto">
+      <loading-bar v-if="isLoading"/>
+      <notification-row :notifications="notifications" v-else/>
     </div>
-  </transition>
 </template>
 
 <style>
@@ -36,7 +36,6 @@ onMounted(() => {
   height: 100%;
   background-color: #fff;
   z-index: 9;
-  transition: left 0.1s ease-in-out;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.327);
   text-wrap: stable;
   /* word-wrap: break-word; */
