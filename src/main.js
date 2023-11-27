@@ -33,8 +33,6 @@ window.Echo = new Echo({
   forceTLS: true
 })
 
-Pusher.logToConsole = true
-
 const options = {
   transition: 'Vue-Toastification__bounce',
   maxToasts: 20,
