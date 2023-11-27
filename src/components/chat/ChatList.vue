@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 defineProps(['chats', 'receiverNames', 'avatars'])
 const emit = defineEmits(['openChat'])
 

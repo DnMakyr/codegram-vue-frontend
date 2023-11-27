@@ -31,6 +31,7 @@ const post = inject('post')
       </template>
     </description-div>
     <comment-form :post="post"/>
-    <div class="mt-1">Show Comments</div>
+    <div class="mt-1" v-if="post.comments.length > 1">Show Comments</div>
+    <div v-else>{{post.comments[0]}}</div>
   </div>
 </template>

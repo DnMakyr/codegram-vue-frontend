@@ -22,7 +22,7 @@ export default function usePosts() {
   async function createPost(data) {
     try {
       await axios
-        .post('api/post', data, {
+        .post('api/post/store ', data, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
