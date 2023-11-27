@@ -7,6 +7,8 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 
 const store = createPinia()
 store.use(piniaPluginPersistedstate)
@@ -33,8 +35,27 @@ window.Echo = new Echo({
 
 Pusher.logToConsole = true
 
+const options = {
+  transition: 'Vue-Toastification__bounce',
+  maxToasts: 20,
+  newestOnTop: true,
+  filterToasts: (toasts) => {
+    // Keep track of existing types
+    const types = {}
+    return toasts.reduce((aggToasts, toast) => {
+      // Check if type was not seen before
+      if (!types[toast.type]) {
+        aggToasts.push(toast)
+        types[toast.type] = true
+      }
+      return aggToasts
+    }, [])
+  }
+}
+
 const app = createApp(App)
 app.use(store)
 app.use(router)
+app.use(Toast, options)
 
 app.mount('#app')

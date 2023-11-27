@@ -14,9 +14,6 @@ const { chats, isLoading, getChats } = useChat()
 const receiverNames = ref([])
 const avatars = ref([])
 onMounted(async () => {
-  window.Echo.channel('testing').listen('.test-event', (e) => {
-    console.log(e)
-  })
   await getChats()
 
   chats.value.map((chat) => {

@@ -1,8 +1,14 @@
 <script setup>
+import { ref } from 'vue'
 defineProps(['chats', 'receiverNames', 'avatars'])
 const emit = defineEmits(['openChat'])
 
+const isActive = ref(false)
+const activeChatId = ref(null)
+
 function openChat(id) {
+  isActive.value = true
+  activeChatId.value = id
   emit('openChat', id)
 }
 </script>
@@ -17,7 +23,7 @@ function openChat(id) {
         @click="openChat(chat.id)"
       >
         <img :src="'http://localhost:8000/storage/' + avatars[index]" alt="avatar" />
-        <span>{{ receiverNames[index] }}</span>
+        <span :class="{'tw-text-red-600 tw-border-black tw-border-solid': isActive && activeChatId == chat.id}">{{ receiverNames[index] }}</span>
       </div>
     </div>
   </div>
