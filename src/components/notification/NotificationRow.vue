@@ -10,11 +10,13 @@ defineProps({
   <div>
     <div
       id="notification-row"
-      class=" tw-flex tw-items-center tw-p-4 tw-justify-center"
+      class="tw-flex tw-items-center tw-p-4 tw-justify-center"
       v-for="(notification, index) in notifications"
       :key="index"
     >
-      <span v-if="notification.data.type === 'like'"> {{ notification.data.username }} Like </span>
+      <span v-if="notification.data.type === 'like'"
+        >{{ notification.data.username }} liked your post: {{ notification.data.post_caption }}
+      </span>
       <span
         v-else-if="notification.data.type === 'friend' && notification.data.action === 'request'"
       >
@@ -25,7 +27,7 @@ defineProps({
       >
         {{ notification.data.username }} accepted your request</span
       >
-      <span v-else> Comment </span>
+      <span v-else> {{ notification.data.username }} commented on your post: {{ notification.data.post_caption }}</span>
     </div>
   </div>
 </template>

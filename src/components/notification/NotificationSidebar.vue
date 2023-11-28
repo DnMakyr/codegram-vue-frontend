@@ -4,9 +4,7 @@ import useNotifcations from '../../composables/useNotifications'
 import NotificationRow from './NotificationRow.vue'
 import LoadingBar from '../LoadingBar.vue'
 
-const { isLoading, notifications, unreadCount, getNotifications } = useNotifcations()
-
-const unreadNotiCount = unreadCount.value
+const { isLoading, notifications, getNotifications } = useNotifcations()
 
 defineProps({
   isShown: {
@@ -16,13 +14,13 @@ defineProps({
 const emit = defineEmits(['count'])
 onMounted(() => {
   getNotifications()
-  emit('getCount', unreadNotiCount)
+
 })
 </script>
 <template>
     <div id="collapsible-div" class="tw-overflow-y-auto">
-      <loading-bar v-if="isLoading"/>
-      <notification-row :notifications="notifications" v-else/>
+      <loading-bar v-if="isLoading" />
+      <notification-row :notifications="notifications" v-cloak />
     </div>
 </template>
 

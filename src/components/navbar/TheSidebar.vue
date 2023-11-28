@@ -2,9 +2,15 @@
 import { ref } from 'vue'
 import SidebarLink from './SidebarLink.vue'
 import { useAuth } from '../../composables/useAuth'
+import useNotifications from '../../composables/useNotifications'
 import { useAuthStore } from '../../stores/auth'
 import CreatePostForm from '../posts/CreatePostForm.vue'
 import NotificationSidebar from '../notification/NotificationSidebar.vue'
+import IndicatorDot from '../notification/IndicatorDot.vue'
+import router from '../../router'
+
+const { newNotifications } = useNotifications()
+
 const logout = useAuth().logout
 const authId = useAuthStore().userId
 const avatar = useAuthStore().avatar
@@ -13,17 +19,15 @@ const isActive = ref(false)
 const isShown = ref(false)
 function showNoti() {
   isShown.value = !isShown.value
-}
-function getCount(count) {
-  console.log(count)
+  newNotifications.value = false
 }
 </script>
 
 <template>
-  <div @getCount="getCount">
+  <div>
     <nav id="sidebarMenu" class="sidebar">
       <div class="tw-position-sticky tw-space-y-3">
-        <div id="icon" class="tw-flex">
+        <div id="icon" class="tw-flex tw-cursor-pointer" @click="router.push('/dashboard')">
           <img
             src="/svg/codegram.svg"
             alt="logo"
@@ -52,7 +56,7 @@ function getCount(count) {
         </button>
 
         <button @click="showNoti">
-          <img src="/icons/heart.png" class="me-3" alt="" /> <span>Notification</span>
+          <img src="/icons/heart.png" class="me-3" alt="" /><indicator-dot :hasNewNotification="newNotifications"/> <span>Notification</span>
         </button>
 
         <sidebar-link :href="`/profile/${authId}`">
@@ -76,6 +80,7 @@ function getCount(count) {
 <style scoped>
 /* Sidebar */
 .sidebar {
+  border-right: solid 2px #dbdbdb;
   position: fixed;
   top: 0;
   bottom: 0;
