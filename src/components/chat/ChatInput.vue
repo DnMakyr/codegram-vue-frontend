@@ -29,7 +29,7 @@ function send() {
 <template>
   <div>
     <form class="tw-space-x-2" @submit.prevent="send">
-      <input class="tw-w-11/12 tw-py-1 focus:tw-outline-blue-400" v-model="message.content" />
+      <input class="tw-w-11/12 tw-py-1 focus:tw-outline-blue-400 tw-border-solid tw-border-2 tw-rounded-sm tw-border-black" v-model="message.content" />
       <button type="submit" class="tw-bg-blue-600 tw-text-white tw-p-1 tw-rounded-sm">Send</button>
     </form>
   </div>

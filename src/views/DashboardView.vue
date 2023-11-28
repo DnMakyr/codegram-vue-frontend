@@ -4,10 +4,6 @@ import usePosts from '../composables/usePosts'
 import LoadingBar from '../components/LoadingBar.vue'
 import PostArticle from '../components/posts/PostArticle.vue'
 import SuggestionDiv from '../components/SuggestionDiv.vue'
-import { useToast } from 'vue-toastification'
-import { useAuthStore } from '../stores/auth'
-
-const toast = useToast()
 
 const { posts, suggestions, isLoading, getDashboard } = usePosts()
 onMounted(() => {

@@ -17,7 +17,6 @@ const authId = JSON.parse(sessionStorage.getItem('auth')).userId
 onMounted(async () => {
   window.Echo.channel('chat-' + props.chatId).listen('.message', (newMessage) => {
     messages.value.push(newMessage)
-    console.log(typeof newMessage.sender)
   })
   await getMessages(props.chatId)
 })
@@ -26,8 +25,8 @@ onMounted(async () => {
 <template>
   <loading-bar v-if="isLoading" />
   <div class="card" v-else>
-    <div class="card-header">
-      <div class="tw-flex tw-space-x-1">
+    <div class="card-header tw-flex">
+      <div class="tw-flex tw-space-x-1 tw-flex-1">
         <img
           :src="`http://localhost:8000/storage/${replier.profile?.image}`"
           class="tw-rounded-full tw-w-10 tw-h-10 tw-object-cover"
@@ -36,8 +35,9 @@ onMounted(async () => {
           {{ replier.name }}
         </span>
       </div>
+      <button class="btn btn-outline-danger btn-sm" @click="$emit('closeChat')">Close Chat</button>
     </div>
-    <div class="card-body tw-bg-red-300">
+    <div class="card-body tw-overflow-auto tw-bg-red-300">
       <chat-container :messages="messages" :authId="authId" />
     </div>
     <div class="card-footer">

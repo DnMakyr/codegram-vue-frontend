@@ -21,7 +21,7 @@ export default function useNotifications() {
     }
   }
 
-  window.Echo.channel('notification-' + useAuthStore().userId).listen('.notification', (e) => {
+  window.Echo.channel('user-' + useAuthStore().userId).listen('.notification', (e) => {
     newNotifications.value = true
     if (e.action === 'comment') {
       toast.info(`${e.sender?.username} commented on your post!`, {

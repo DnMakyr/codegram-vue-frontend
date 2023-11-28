@@ -1,60 +1,48 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { onMounted } from 'vue'
+import router from '../../router'
 import LoadingSpinner from '../LoadingSpinner.vue'
+import PostOverlayHeader from './PostOverlayHeader.vue'
+import PostOverlayBodyVue from './PostOverlayBody.vue'
+import CommentForm from './CommentForm.vue'
+import usePosts from '../../composables/usePosts'
 
-const props = defineProps(['postId'])
+const { user, imgSrc, caption, comments, likeCount, liked, isLoading, getSpecificPost } = usePosts()
+const props = defineProps(['id'])
 
-const caption = ref('')
-const imgSrc = ref('')
-const comments = ref([])
-const liked = ref(false)
-const user = ref({})
-const isLoading = ref(false)
-const likeCount = ref(0)
-onMounted(async () => {
-  try {
-    isLoading.value = true
-    const res = await axios.get(`api/post/${props.postId}`)
-    caption.value = res.data.post.caption
-    imgSrc.value = res.data.post.image
-    comments.value = res.data.post.comments
-    liked.value = res.data.post.liked
-    user.value = res.data.post.user
-    likeCount.value = res.data.likeCount
-  } catch (err) {
-    console.log(err)
-  } finally {
-    isLoading.value = false
-  }
+onMounted(() => {
+  getSpecificPost(props.id)
 })
 </script>
 
 <template>
   <div>
     <div class="modal" @click="$emit('closeModal')">
+      <button
+        type="button"
+        class="btn-close tw-top-0 tw-right-0 tw-fixed"
+        aria-label="Close"
+        @click="router.go(-1)"
+      ></button>
       <div class="modal-content card" @click.stop>
         <loading-spinner v-if="isLoading" />
         <div class="container" v-else>
           <div class="row">
             <div class="col-8" style="max-height: 705px">
-              <div class="img-container tw-object-contain">
+              <div class="img-container tw-object-fit">
                 <img :src="'http://localhost:8000/storage/' + imgSrc" alt="" />
               </div>
             </div>
             <div class="col-4 tw-border-l-2 tw-py-2">
-              <div class="tw-flex tw-text-center tw-space-x-2 tw-border-b-2-">
-                <img
-                  :src="'http://localhost:8000/storage/' + user.profile?.image"
-                  alt=""
-                  class="tw-rounded-full tw-h-9 tw-w-9 tw-object-cover"
-                />
-                <span class="tw-text-base tw-font-bold">{{ user.username }}</span>
-              </div>
-              <div class="caption tw-flex">
-                <span class="tw-text-base tw-font-bold tw-pr-2"> {{ user.username }}</span>
-                <p> {{ caption }}</p>
-              </div>
+              <post-overlay-header :user="user" />
+              <post-overlay-body-vue
+                :caption="caption"
+                :comments="comments"
+                :likeCount="likeCount"
+                :liked="liked"
+                :user="user"
+              />
+              <comment-form class="tw-absolute tw-bottom-0 tw-py-4 tw-border-t-2 tw-w-fit" :post="props.post" />
             </div>
           </div>
         </div>
@@ -89,8 +77,8 @@ onMounted(async () => {
     justify-content: center;
     align-items: center;
     img {
-      max-width: 700px;
-      max-height: 700px;
+      width: 43.75rem;
+      height: 43.75rem;
     }
   }
 }

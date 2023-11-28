@@ -6,6 +6,12 @@ export default function usePosts() {
   const posts = ref({})
   const suggestions = ref({})
   const isLoading = ref(false)
+  const caption = ref('')
+  const imgSrc = ref('')
+  const comments = ref({})
+  const liked = ref(false)
+  const user = ref({})
+  const likeCount = ref(0)
 
   async function getDashboard() {
     try {
@@ -34,6 +40,22 @@ export default function usePosts() {
       console.log(err)
     }
   }
+  async function getSpecificPost(id) {
+    try {
+      isLoading.value = true
+      const res = await axios.get(`api/post/${id}`)
+      caption.value = res.data.post.caption
+      imgSrc.value = res.data.post.image
+      comments.value = res.data.post.comments
+      liked.value = res.data.post.liked
+      user.value = res.data.post.user
+      likeCount.value = res.data.likeCount
+    } catch (err) {
+      console.log(err)
+    } finally {
+      isLoading.value = false
+    }
+  }
   async function postComment(data) {
     try {
       await axios.post('api/comment', data)
@@ -45,8 +67,15 @@ export default function usePosts() {
     posts,
     suggestions,
     isLoading,
+    caption,
+    imgSrc,
+    comments,
+    liked,
+    user,
+    likeCount,
     getDashboard,
     createPost,
+    getSpecificPost,
     postComment
   }
 }

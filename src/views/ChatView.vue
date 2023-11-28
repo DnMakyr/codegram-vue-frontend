@@ -31,6 +31,10 @@ function openChat(id) {
   isOpen.value = true
   currentChatId.value = id
 }
+function closeChat() {
+  isOpen.value = false
+  currentChatId.value = null
+}
 </script>
 
 <template>
@@ -48,7 +52,7 @@ function openChat(id) {
       </div>
       <div class="col-9">
         <landing-window v-if="!isOpen" />
-        <chat-window :chatId="currentChatId" :key="currentChatId" v-else />
+        <chat-window :chatId="currentChatId" :key="currentChatId" @closeChat="closeChat" v-else />
       </div>
     </div>
   </div>

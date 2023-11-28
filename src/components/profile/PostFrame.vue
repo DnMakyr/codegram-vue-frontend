@@ -19,7 +19,7 @@ function closeModal() {
 <template>
   <div class="col-4 p-1">
     <img :src="'http://localhost:8000/storage/' + post.image" alt="post" @click="toggle" />
-    <post-overlay v-if="showModal" :postId="post.id" @closeModal="closeModal" :key="post.id"/>
+    <post-overlay v-if="showModal" :id="post.id" @closeModal="closeModal" :key="post.id"/>
   </div>
 </template>
 

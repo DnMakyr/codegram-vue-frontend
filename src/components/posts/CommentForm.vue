@@ -7,11 +7,11 @@ const commenter = useAuthStore().userId
 
 const { postComment } = usePosts()
 
-const props = defineProps(['post'])
+const props = defineProps(['id'])
 
 const formData = ref({
   commenter: commenter,
-  post: props.post.id,
+  post: props.id,
   comment: ''
 })
 // const minRows = 1;
@@ -38,7 +38,6 @@ const handleEnterKey = (event) => {
 const submitForm = () => {
   if (formData.value.comment.trim()) {
     postComment(formData.value)
-    console.log('Submit:', formData.value.comment)
     formData.value.comment = ''
     adjustTextarea() // Adjust the textarea height after resetting
   }

@@ -11,7 +11,6 @@ defineProps({
     type: Boolean
   }
 })
-const emit = defineEmits(['count'])
 onMounted(() => {
   getNotifications()
 
