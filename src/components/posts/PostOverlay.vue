@@ -36,13 +36,16 @@ onMounted(() => {
             <div class="col-4 tw-border-l-2 tw-py-2">
               <post-overlay-header :user="user" />
               <post-overlay-body-vue
+                :user="user"
                 :caption="caption"
                 :comments="comments"
                 :likeCount="likeCount"
                 :liked="liked"
-                :user="user"
               />
-              <comment-form class="tw-absolute tw-bottom-0 tw-py-4 tw-border-t-2 tw-w-fit" :post="props.post" />
+              <comment-form 
+                class="tw-absolute tw-bottom-0 tw-py-4 tw-border-t-2 tw-w-fit"
+                :id="props.id"
+              />
             </div>
           </div>
         </div>

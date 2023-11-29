@@ -8,9 +8,9 @@ export default function usePosts() {
   const isLoading = ref(false)
   const caption = ref('')
   const imgSrc = ref('')
-  const comments = ref({})
-  const liked = ref(false)
   const user = ref({})
+  const comments = ref([])
+  const liked = ref(false)
   const likeCount = ref(0)
 
   async function getDashboard() {
@@ -44,11 +44,11 @@ export default function usePosts() {
     try {
       isLoading.value = true
       const res = await axios.get(`api/post/${id}`)
+      user.value = res.data.post.user
       caption.value = res.data.post.caption
       imgSrc.value = res.data.post.image
       comments.value = res.data.post.comments
       liked.value = res.data.post.liked
-      user.value = res.data.post.user
       likeCount.value = res.data.likeCount
     } catch (err) {
       console.log(err)
@@ -67,11 +67,11 @@ export default function usePosts() {
     posts,
     suggestions,
     isLoading,
+    user,
     caption,
     imgSrc,
     comments,
     liked,
-    user,
     likeCount,
     getDashboard,
     createPost,

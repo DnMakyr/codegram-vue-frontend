@@ -39,7 +39,7 @@ const submitForm = () => {
   if (formData.value.comment.trim()) {
     postComment(formData.value)
     formData.value.comment = ''
-    adjustTextarea() // Adjust the textarea height after resetting
+    adjustTextarea()
   }
 }
 </script>

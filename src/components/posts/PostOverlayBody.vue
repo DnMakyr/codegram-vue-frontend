@@ -30,10 +30,10 @@ defineProps({
         <div class="tw-flex tw-items-center">
           <img
             class="tw-h-9 tw-w-9 tw-rounded-full tw-object-cover"
-            :src="'http://localhost:8000/storage/' + user.profile.image"
+            :src="'http://localhost:8000/storage/' + comment.user?.profile?.image"
             alt=""
           />
-          <span class="tw-flex tw-px-1 tw-font-bold">{{ comment.user.username }}</span>
+          <span class="tw-flex tw-px-1 tw-font-bold">{{ comment.user?.username }}</span>
         </div>
         <span>{{ comment.content }}</span>
       </div>

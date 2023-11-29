@@ -33,7 +33,7 @@ const post = inject('post')
     </description-div>
     <comment-form :id="post.id" />
     <div
-      class="mt-1"
+      class="mt-1 tw-text-slate-400 tw-cursor-pointer tw-font-semibold"
       v-if="post.comments.length > 1"
       @click="router.push({ name: 'post', params: { id: post.id } })"
     >

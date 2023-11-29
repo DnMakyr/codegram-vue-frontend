@@ -2,7 +2,9 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { useToast } from 'vue-toastification'
 import { useAuthStore } from '../stores/auth'
+import usePosts from './usePosts'
 
+const {comments} = usePosts()
 const toast = useToast()
 
 export default function useNotifications() {
@@ -20,6 +22,10 @@ export default function useNotifications() {
       isLoading.value = false
     }
   }
+ const commentEcho = window.Echo.channel('comment').listen('.comment', (e) => {
+        comments.value.push(e.comment)
+        console.log(comments.value)
+ })
 
   window.Echo.channel('user-' + useAuthStore().userId).listen('.notification', (e) => {
     newNotifications.value = true
@@ -81,5 +87,5 @@ export default function useNotifications() {
       })
     }
   })
-  return { notifications, newNotifications, getNotifications }
+  return { notifications, newNotifications, commentEcho, getNotifications }
 }
