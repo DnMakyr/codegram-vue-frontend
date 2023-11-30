@@ -7,7 +7,7 @@ defineProps({
 })
 </script>
 <template>
-  <div class="tw-flex tw-text-center tw-space-x-2 tw-border-b-2-">
+  <div class="tw-flex tw-text-center tw-space-x-2 tw-border-b-2">
     <img
       :src="'http://localhost:8000/storage/' + user.profile?.image"
       alt=""

@@ -32,16 +32,18 @@ const post = inject('post')
       </template>
     </description-div>
     <comment-form :id="post.id" />
-    <div
-      class="mt-1 tw-text-slate-400 tw-cursor-pointer tw-font-semibold"
-      v-if="post.comments.length > 1"
-      @click="router.push({ name: 'post', params: { id: post.id } })"
-    >
-      Show Comments
-    </div>
-    <div v-else>
-      <span class="tw-font-bold tw-pr-2">{{ post.comments[0]?.commenter }}</span
-      >{{ post.comments[0]?.content }}
+    <div v-show="post.comments.length > 0">
+      <div
+        class="mt-1 tw-text-slate-400 tw-cursor-pointer tw-font-semibold"
+        v-if="post.comments.length > 1"
+        @click="router.push({ name: 'post', params: { id: post.id } })"
+      >
+        Show Comments
+      </div>
+      <div v-else>
+        <span class="tw-font-bold tw-pr-2">{{ post.comments[0]?.commenter }}</span
+        >{{ post.comments[0]?.content }}
+      </div>
     </div>
   </div>
 </template>

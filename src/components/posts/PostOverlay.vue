@@ -3,7 +3,7 @@ import { onMounted } from 'vue'
 import router from '../../router'
 import LoadingSpinner from '../LoadingSpinner.vue'
 import PostOverlayHeader from './PostOverlayHeader.vue'
-import PostOverlayBodyVue from './PostOverlayBody.vue'
+import PostOverlayBody from './PostOverlayBody.vue'
 import CommentForm from './CommentForm.vue'
 import usePosts from '../../composables/usePosts'
 
@@ -29,20 +29,20 @@ onMounted(() => {
         <div class="container" v-else>
           <div class="row">
             <div class="col-8" style="max-height: 705px">
-              <div class="img-container tw-object-fit">
+              <div class="img-container tw-object-cover">
                 <img :src="'http://localhost:8000/storage/' + imgSrc" alt="" />
               </div>
             </div>
             <div class="col-4 tw-border-l-2 tw-py-2">
               <post-overlay-header :user="user" />
-              <post-overlay-body-vue
+              <post-overlay-body
                 :user="user"
                 :caption="caption"
                 :comments="comments"
                 :likeCount="likeCount"
                 :liked="liked"
               />
-              <comment-form 
+              <comment-form
                 class="tw-absolute tw-bottom-0 tw-py-4 tw-border-t-2 tw-w-fit"
                 :id="props.id"
               />

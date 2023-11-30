@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import ChatView from '../views/ChatView.vue'
 
 const isLogin = JSON.parse(sessionStorage.getItem('isLogin'))
 
@@ -54,8 +53,13 @@ const router = createRouter({
     {
       path: '/chat',
       name: 'chat',
-      component: ChatView
+      component: () => import('../views/ChatView.vue'),
     },
+    {
+      path:'/search',
+      name: 'search',
+      component: () => import('../views/SearchView.vue')
+    }
   ]
 })
 
