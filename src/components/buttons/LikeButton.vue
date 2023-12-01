@@ -1,32 +1,37 @@
 <script setup>
 import axios from 'axios'
-import { ref, inject } from 'vue'
+import { ref  } from 'vue'
 
-const post = inject('post')
+const props = defineProps(['id', 'liked'])
 
-const likeStatus = ref(post.liked)
+
+const likeStatus = ref(props.liked)
+const emit = defineEmits(['isLiked'])
+
 
 async function like() {
   if (likeStatus.value === true) {
-    await axios.post(`api/unlike/${post.id}`).then(() => {
+    await axios.post(`api/unlike/${props.id}`).then(() => {
       likeStatus.value = !likeStatus.value
+      emit('isLiked', -1)
     })
   } else {
-    await axios.post(`api/like/${post.id}`).then(() => {
+    await axios.post(`api/like/${props.id}`).then(() => {
       likeStatus.value = !likeStatus.value
+      emit('isLiked', 1)
     })
   }
 }
 </script>
 
 <template>
-  <span class="like" @click="like">
+  <button class="like" @click="like">
     <div>
       <span
         ><img :src="likeStatus ? '/icons/red_heart.png' : '/icons/heart.png'" alt=""
       /></span>
     </div>
-  </span>
+  </button>
 </template>
 <style scoped>
 .like:hover {

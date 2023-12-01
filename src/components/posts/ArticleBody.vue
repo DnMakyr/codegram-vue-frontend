@@ -7,21 +7,25 @@ import CommentForm from './CommentForm.vue'
 import { inject } from 'vue'
 
 const post = inject('post')
+
+const isLiked = (val) => {
+  post.likeCount += val
+}
 </script>
 
 <template>
   <div class="interaction mt-3">
     <div class="row">
       <div class="col-6 tw-flex tw-space-x-2">
-        <LikeButton />
+        <LikeButton :id="post.id" :liked="post.liked" @isLiked="isLiked" />
         <CommentButton />
       </div>
       <div class="col-6 tw-flex" style="flex-direction: row-reverse">
         <span><img src="/icons/ribbon.png" alt="" /></span>
       </div>
     </div>
-    <div class="mt-2" style="font-size: 14px; font-weight: bold" v-show="post.likeCount > 0">
-      <span>{{ post.likeCount }}</span> {{ post.likeCount === 1 ? 'like' : 'likes' }}
+    <div class="mt-2" style="font-size: 14px; font-weight: bold" v-if="post.likeCount > 0">
+      <span>{{ post.likeCount }} {{ post.likeCount === 1 ? 'like' : 'likes' }}</span>
     </div>
     <description-div>
       <template v-slot:username>

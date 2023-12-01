@@ -9,6 +9,8 @@ const { postComment } = usePosts()
 
 const props = defineProps(['id'])
 
+const emit = defineEmits(['commented'])
+
 const formData = ref({
   commenter: commenter,
   post: props.id,
@@ -38,6 +40,7 @@ const handleEnterKey = (event) => {
 const submitForm = () => {
   if (formData.value.comment.trim()) {
     postComment(formData.value)
+    emit('commented')
     formData.value.comment = ''
     adjustTextarea()
   }

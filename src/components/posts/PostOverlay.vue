@@ -6,6 +6,7 @@ import PostOverlayHeader from './PostOverlayHeader.vue'
 import PostOverlayBody from './PostOverlayBody.vue'
 import CommentForm from './CommentForm.vue'
 import usePosts from '../../composables/usePosts'
+import LikeButton from '../buttons/LikeButton.vue'
 
 const { user, imgSrc, caption, comments, likeCount, liked, isLoading, getSpecificPost } = usePosts()
 const props = defineProps(['id'])
@@ -13,6 +14,12 @@ const props = defineProps(['id'])
 onMounted(() => {
   getSpecificPost(props.id)
 })
+function updateComments() {
+  getSpecificPost(props.id)
+}
+function isLiked(val) {
+  likeCount.value += val
+}
 </script>
 
 <template>
@@ -28,24 +35,28 @@ onMounted(() => {
         <loading-spinner v-if="isLoading" />
         <div class="container" v-else>
           <div class="row">
-            <div class="col-8" style="max-height: 705px">
+            <div class="col-7 tw-flex tw-justify-center" style="max-height: 705px">
               <div class="img-container tw-object-cover">
                 <img :src="'http://localhost:8000/storage/' + imgSrc" alt="" />
               </div>
             </div>
-            <div class="col-4 tw-border-l-2 tw-py-2">
-              <post-overlay-header :user="user" />
-              <post-overlay-body
-                :user="user"
-                :caption="caption"
-                :comments="comments"
-                :likeCount="likeCount"
-                :liked="liked"
-              />
-              <comment-form
-                class="tw-absolute tw-bottom-0 tw-py-4 tw-border-t-2 tw-w-fit"
-                :id="props.id"
-              />
+            <div class="col-5 tw-border-l-2">
+              <div class="tw-py-2">
+                <post-overlay-header :user="user" :caption="caption" />
+                <post-overlay-body
+                  :user="user"
+                  :comments="comments"
+                  :likeCount="likeCount"
+                  :liked="liked"
+                />
+                <div class="tw-pt-2 tw-border-t-2">
+                  <like-button :id="props.id" :liked="liked" @isLiked="isLiked" />
+                  <span v-if="likeCount > 0">{{ likeCount }} {{ likeCount > 1 ? "like" : "likes" }}</span>
+                </div>
+              </div>
+              <div class="tw-w-full mt-auto">
+                <comment-form @commented="updateComments" class="tw-py-2" :id="props.id" />
+              </div>
             </div>
           </div>
         </div>
@@ -80,8 +91,8 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
     img {
-      width: 43.75rem;
-      height: 43.75rem;
+      width: 42rem;
+      height: 42rem;
     }
   }
 }

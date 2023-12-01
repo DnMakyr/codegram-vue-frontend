@@ -49,7 +49,7 @@ export default function usePosts() {
       imgSrc.value = res.data.post.image
       comments.value = res.data.post.comments
       liked.value = res.data.post.liked
-      likeCount.value = res.data.likeCount
+      likeCount.value = res.data.post.likeCount
     } catch (err) {
       console.log(err)
     } finally {

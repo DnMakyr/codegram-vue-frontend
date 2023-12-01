@@ -81,5 +81,5 @@ export default function useNotifications() {
       })
     }
   })
-  return { notifications, newNotifications, commentEcho, getNotifications }
+  return { notifications, newNotifications, getNotifications }
 }
