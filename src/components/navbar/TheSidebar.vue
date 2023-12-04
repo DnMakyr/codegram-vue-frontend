@@ -21,6 +21,9 @@ function showNoti() {
   isShown.value = !isShown.value
   newNotifications.value = false
 }
+function closeForm() {
+  isActive.value = false
+}
 </script>
 
 <template>
@@ -73,7 +76,7 @@ function showNoti() {
         <notification-sidebar v-if="isShown" />
       </div>
     </nav>
-    <create-post-form :isActive="isActive" />
+    <create-post-form :isActive="isActive" @closeForm="closeForm"/>
   </div>
 </template>
 

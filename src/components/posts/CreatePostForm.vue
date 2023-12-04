@@ -38,7 +38,7 @@ defineProps({
             />
           </label>
           <input type="file" accept="image/*" placeholder="Image" @change="selectImage" />
-          <button type="submit" @click="!isActive" class="!tw-border-t-slate-950">Create</button>
+          <button type="submit" @click="$emit('closeForm')" class="btn btn-outline-secondary">Create</button>
           <img :src="imageUrl" alt="" style=" height: 25rem; object-fit: cover;"/>
         </form>
       </div>

@@ -31,7 +31,16 @@ function toProfile() {
         <!-- <div style="font-size: 12px">location</div> -->
       </div>
     </div>
-    <div class="tw-flex more"><img src="/icons/more.png" /></div>
+    <div class="dropdown">
+      <button class="tw-flex more" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="/icons/more.png" />
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li class="dropdown-item">Action</li>
+        <li class="dropdown-item">Another action</li>
+        <li class="dropdown-item">Something else here</li>
+      </ul>
+    </div>
   </div>
 </template>
 

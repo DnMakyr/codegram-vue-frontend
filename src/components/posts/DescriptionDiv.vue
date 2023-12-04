@@ -1,6 +1,4 @@
 <script setup>
-
-// const post = inject('post')
 </script>
 
 <template>

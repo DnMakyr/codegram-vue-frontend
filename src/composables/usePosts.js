@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ref } from 'vue'
 import router from '../router'
+import { useAuthStore } from '../stores/auth'
 
 export default function usePosts() {
   const posts = ref({})
@@ -12,7 +13,7 @@ export default function usePosts() {
   const comments = ref([])
   const liked = ref(false)
   const likeCount = ref(0)
-
+  const authId = useAuthStore().userId
   async function getDashboard() {
     try {
       isLoading.value = true
@@ -56,6 +57,15 @@ export default function usePosts() {
       isLoading.value = false
     }
   }
+  async function deletePost(id) {
+    try {
+      await axios.delete(`api/post/delete/${id}`).then(() => {
+        router.push(`/profile/${authId}`)
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
   async function postComment(data) {
     try {
       await axios.post('api/comment', data)
@@ -76,6 +86,7 @@ export default function usePosts() {
     getDashboard,
     createPost,
     getSpecificPost,
+    deletePost,
     postComment
   }
 }

@@ -25,7 +25,7 @@ export default function useNotifications() {
     newNotifications.value = true
     if (e.action === 'comment') {
       toast.info(`${e.sender?.username} commented on your post!`, {
-        timeout: 5000,
+        timeout: 3000,
         closeOnClick: true,
         pauseOnFocusLoss: true,
         pauseOnHover: true,
@@ -39,7 +39,7 @@ export default function useNotifications() {
       })
     } else if (e.action === 'like') {
       toast.success(`${e.sender?.username} liked your post!`, {
-        timeout: 5000,
+        timeout: 3000,
         closeOnClick: true,
         pauseOnFocusLoss: true,
         pauseOnHover: true,
@@ -53,7 +53,7 @@ export default function useNotifications() {
       })
     } else if (e.action === 'request') {
       toast(`${e.sender.username} want to be your friend!`, {
-        timeout: 5000,
+        timeout: 3000,
         closeOnClick: true,
         pauseOnFocusLoss: true,
         pauseOnHover: true,
@@ -67,7 +67,7 @@ export default function useNotifications() {
       })
     } else if (e.action === 'accepted') {
       toast.success(`${e.sender.username} accepted your request!`, {
-        timeout: 5000,
+        timeout: 3000,
         closeOnClick: true,
         pauseOnFocusLoss: true,
         pauseOnHover: true,

@@ -47,7 +47,7 @@ const isLiked = (val) => {
       <div v-else>
         <span class="tw-font-bold tw-pr-2">{{ post.comments[0]?.commenter }}</span
         >{{ post.comments[0]?.content }}
-      </div>
+      </div>  
     </div>
   </div>
 </template>

@@ -28,7 +28,7 @@ export const useAuth = () => {
       .then(() => {
         sessionStorage.removeItem('authUserId')
         authStore.logOut()
-        router.push({ name: 'home' })
+        router.push({ name: 'login' })
       })
       .catch((err) => {
         console.log(err)

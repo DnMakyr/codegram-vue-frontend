@@ -8,6 +8,7 @@ export default function useProfile() {
   const profile = ref({})
   const posts = ref({})
   const statistics = ref({})
+  const friends = ref({})
   const isLoading = ref(false)
   const config = {
     headers: {
@@ -45,11 +46,22 @@ export default function useProfile() {
     } catch (err) {
       if (err.response.status === 403) {
         alert(err.response.data.message)
-      }
-      else {
+      } else {
         console.log(err)
       }
     }
   }
-  return { user, statistics, profile, posts, isLoading, getProfile, updateProfile }
+  async function getFriends(id) {
+    try {
+      isLoading.value = true
+      const res = await axios.get('api/friends/' + id)
+      friends.value = res.data.friends
+    } catch (err) {
+      console.log(err)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  return { user, statistics, profile, posts, isLoading, getProfile, updateProfile, getFriends }
 }

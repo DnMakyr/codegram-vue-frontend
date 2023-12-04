@@ -13,7 +13,6 @@ defineProps({
 })
 onMounted(() => {
   getNotifications()
-
 })
 </script>
 <template>
