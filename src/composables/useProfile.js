@@ -8,7 +8,7 @@ export default function useProfile() {
   const profile = ref({})
   const posts = ref({})
   const statistics = ref({})
-  const friends = ref({})
+  const friends = ref([])
   const isLoading = ref(false)
   const config = {
     headers: {
@@ -63,5 +63,5 @@ export default function useProfile() {
     }
   }
 
-  return { user, statistics, profile, posts, isLoading, getProfile, updateProfile, getFriends }
+  return { user, statistics, profile, posts, isLoading, friends, getProfile, updateProfile, getFriends }
 }

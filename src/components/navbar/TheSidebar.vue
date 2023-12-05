@@ -98,7 +98,7 @@ function closeForm() {
   background-color: #f8fafc;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .sidebar {
     display: none !important;
   }

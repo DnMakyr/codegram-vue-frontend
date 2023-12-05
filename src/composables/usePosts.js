@@ -14,10 +14,10 @@ export default function usePosts() {
   const liked = ref(false)
   const likeCount = ref(0)
   const authId = useAuthStore().userId
-  async function getDashboard() {
+  async function getDashboard(page = 1) {
     try {
       isLoading.value = true
-      const res = await axios.get('api/dashboard')
+      const res = await axios.get('api/dashboard?page=' + page)
       posts.value = res.data.posts
       suggestions.value = res.data.suggestions
     } catch (err) {

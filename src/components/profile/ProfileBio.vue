@@ -23,7 +23,7 @@ defineProps({
 <template>
   <div class="row" style="max-height: 350px">
     <div class="col-3 p-5">
-      <img
+      <img v-if="user.profile"
         :src="'http://localhost:8000/storage/' + user.profile?.image"
         alt="avatar"
         class="avatar tw-rounded-full"

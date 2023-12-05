@@ -36,7 +36,7 @@ function isLiked(val) {
         <div class="container" v-else>
           <div class="row">
             <div class="col-7 tw-flex tw-justify-center" style="max-height: 705px">
-              <div class="img-container tw-object-cover">
+              <div class="img-container">
                 <img :src="'http://localhost:8000/storage/' + imgSrc" alt="" />
               </div>
             </div>
@@ -93,6 +93,7 @@ function isLiked(val) {
     img {
       width: 42rem;
       height: 42rem;
+      object-fit: contain;
     }
   }
 }

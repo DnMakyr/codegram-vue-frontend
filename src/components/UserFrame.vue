@@ -1,17 +1,19 @@
 <script setup>
 import { computed } from 'vue'
-import { useAuthStore } from '../stores/auth';
+import { useAuthStore } from '../stores/auth'
 import FriendButton from './buttons/FriendButton.vue'
-import RequestedUserButton from './buttons/RequestedUserButton.vue';
+import RequestedUserButton from './buttons/RequestedUserButton.vue'
 const props = defineProps(['recommendation'])
 const authId = useAuthStore().userId
 const button = computed(() => {
-  if ( authId === props.recommendation.friendship?.requester_id || props.recommendation.friendship === null) {
+  if (
+    authId === props.recommendation.friendship?.requester_id ||
+    props.recommendation.friendship === null
+  ) {
     return FriendButton
   } else if (authId === props.recommendation.friendship?.user_requested_id) {
     return RequestedUserButton
-  }
-  else {
+  } else {
     return null
   }
 })
@@ -22,7 +24,9 @@ const button = computed(() => {
     <div class="card">
       <div class="card-header">
         <img
-          @click="$router.push('/profile/' + recommendation.id)"
+          @click="$router.push({ name: 'profile', params: { id: recommendation.id } })"
+          @keydown.enter="$router.push({ name: 'profile', params: { id: recommendation.id } })"
+          tabindex="0"
           :src="
             recommendation.profile.image
               ? 'http://localhost:8000/storage/' + recommendation.profile.image
@@ -33,7 +37,13 @@ const button = computed(() => {
         />
       </div>
       <div class="card-body tw-flex">
-        <span class="tw-grow tw-font-semibold">{{ recommendation.name }}</span>
+        <span
+          class="tw-grow tw-font-semibold"
+          @click="$router.push({ name: 'profile', params: { id: recommendation.id } })"
+          @keydown.enter="$router.push({ name: 'profile', params: { id: recommendation.id } })"
+          tabindex="0"
+          >{{ recommendation.name }}</span
+        >
 
         <component :is="button" :user="recommendation"></component>
       </div>

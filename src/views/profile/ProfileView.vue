@@ -1,8 +1,8 @@
 <script setup>
-import { shallowRef, onMounted, provide } from 'vue'
-import useProfile from '/src/composables/useProfile'
-import ProfileBio from '/src/components/profile/ProfileBio.vue'
-import { useAuthStore } from '/src/stores/auth'
+import { shallowRef, toRef, onMounted, provide, watchEffect } from 'vue'
+import useProfile from '../../composables/useProfile'
+import ProfileBio from '../../components/profile/ProfileBio.vue'
+import { useAuthStore } from '../../stores/auth'
 import LoadingBar from '../../components/LoadingBar.vue'
 import ProfilePostsDisplay from '../../components/profile/ProfilePostsDisplay.vue'
 import FriendList from '../../components/profile/FriendList.vue'
@@ -29,17 +29,27 @@ const chooseComponent = (component) => {
     IsComponent.value = FriendList
   }
 }
-provide('id', props.id)
+// const id = toRef(props, 'id')
 
+// watchEffect(() => {
+//   getProfile(id.value)
+// })
+
+provide('id', props.id)
 </script>
 
 <template>
   <loading-bar v-if="isLoading" />
   <div class="container-xl pt-4" style="padding-left: 17.438rem; padding-right: 5rem" v-else>
-    <profile-bio :statistics="statistics" :user="user" :authId="authId" />
+    <profile-bio
+      v-if="user && statistics && authId"
+      :statistics="statistics"
+      :user="user"
+      :authId="authId"
+    />
     <switch-bar @chooseComponent="chooseComponent" />
     <keep-alive>
-      <component :is="IsComponent" :posts="posts" :id="authId"/>
+      <component :is="IsComponent" :posts="posts" :id="authId" />
     </keep-alive>
   </div>
 </template>
