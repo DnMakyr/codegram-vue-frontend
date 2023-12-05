@@ -47,7 +47,7 @@ function closeForm() {
         <sidebar-link :href="'/explore'">
           <img src="/icons/direction.png" alt="explore" class="me-3" /><span>Explore</span>
         </sidebar-link>
-        <sidebar-link :href="'search'">
+        <sidebar-link :href="'/search'">
           <img src="/icons/search.png" class="me-3" alt="" /><span>Search</span>
         </sidebar-link>
         <sidebar-link :href="'/chat'">

@@ -27,8 +27,6 @@ const nav = computed(() => {
 <template>
   <component :is="nav"></component>
   <main>
-    <Suspense>
-      <RouterView :key="$route.path"/>
-    </Suspense>
+    <RouterView :key="$route.path" />
   </main>
 </template>
