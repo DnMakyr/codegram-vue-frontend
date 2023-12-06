@@ -1,5 +1,5 @@
 <script setup>
-import { shallowRef, toRef, onMounted, provide, watchEffect } from 'vue'
+import { shallowRef, onMounted, provide } from 'vue'
 import useProfile from '../../composables/useProfile'
 import ProfileBio from '../../components/profile/ProfileBio.vue'
 import { useAuthStore } from '../../stores/auth'

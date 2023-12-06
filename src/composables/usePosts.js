@@ -4,8 +4,11 @@ import router from '../router'
 import { useAuthStore } from '../stores/auth'
 
 export default function usePosts() {
-  const posts = ref({})
-  const suggestions = ref({})
+
+  const posts = ref([])
+  const page = ref(1)
+  const noMorePosts = ref(false)
+  const suggestions = ref([])
   const isLoading = ref(false)
   const caption = ref('')
   const imgSrc = ref('')
@@ -14,16 +17,38 @@ export default function usePosts() {
   const liked = ref(false)
   const likeCount = ref(0)
   const authId = useAuthStore().userId
-  async function getDashboard(page = 1) {
+
+  async function getDashboard() {
     try {
       isLoading.value = true
-      const res = await axios.get('api/dashboard?page=' + page)
-      posts.value = res.data.posts
+      const res = await axios.get(`api/dashboard/?page=${page.value}`)
+      posts.value = res.data.posts.data
       suggestions.value = res.data.suggestions
     } catch (err) {
       console.log(err)
     } finally {
       isLoading.value = false
+    }
+  }
+  async function getMorePosts() {
+    try {
+      if (noMorePosts.value) {
+        // If there are no more posts, return early
+        return
+      }
+
+      page.value++
+      const res = await axios.get(`api/dashboard/?page=${page.value}`)
+
+      if (res.data.posts.data.length === 0) {
+        // If no new posts, set the flag to true
+        noMorePosts.value = true
+        return
+      }
+
+      posts.value = [...posts.value, ...res.data.posts.data]
+    } catch (err) {
+      console.log(err)
     }
   }
   async function createPost(data) {
@@ -75,6 +100,7 @@ export default function usePosts() {
   }
   return {
     posts,
+    page,
     suggestions,
     isLoading,
     user,
@@ -87,6 +113,7 @@ export default function usePosts() {
     createPost,
     getSpecificPost,
     deletePost,
-    postComment
+    postComment,
+    getMorePosts
   }
 }
