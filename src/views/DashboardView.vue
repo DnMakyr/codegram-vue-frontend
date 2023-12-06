@@ -14,7 +14,7 @@ onMounted(() => {
       document.documentElement.scrollHeight -
       document.documentElement.scrollTop -
       window.innerHeight
-    if (pixelsFromBottom < 100) {
+    if (pixelsFromBottom < 200) {
       getMorePosts()
     }
   }, 100)
@@ -30,7 +30,6 @@ onMounted(() => {
       <div class="row tw-flex">
         <div class="col-8 tw-flex tw-flex-col tw-items-center">
           <post-article v-for="post in posts" :post="post" :key="post.id" />
-          <!-- <Bootstrap5Pagination :data="posts" @pagination-change-page="getDashboard" /> -->
         </div>
         <div
           class="col-4 suggestion"

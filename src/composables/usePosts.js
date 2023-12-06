@@ -4,7 +4,6 @@ import router from '../router'
 import { useAuthStore } from '../stores/auth'
 
 export default function usePosts() {
-
   const posts = ref([])
   const page = ref(1)
   const noMorePosts = ref(false)
@@ -18,7 +17,7 @@ export default function usePosts() {
   const likeCount = ref(0)
   const authId = useAuthStore().userId
 
-  async function getDashboard() {
+  const getDashboard = async () => {
     try {
       isLoading.value = true
       const res = await axios.get(`api/dashboard/?page=${page.value}`)
@@ -30,7 +29,7 @@ export default function usePosts() {
       isLoading.value = false
     }
   }
-  async function getMorePosts() {
+  const getMorePosts = async () => {
     try {
       if (noMorePosts.value) {
         // If there are no more posts, return early
@@ -51,7 +50,7 @@ export default function usePosts() {
       console.log(err)
     }
   }
-  async function createPost(data) {
+  const createPost = async (data) => {
     try {
       await axios
         .post('api/post/store ', data, {
@@ -66,7 +65,7 @@ export default function usePosts() {
       console.log(err)
     }
   }
-  async function getSpecificPost(id) {
+  const getSpecificPost = async (id) => {
     try {
       isLoading.value = true
       const res = await axios.get(`api/post/${id}`)
@@ -82,7 +81,7 @@ export default function usePosts() {
       isLoading.value = false
     }
   }
-  async function deletePost(id) {
+  const deletePost = async (id) => {
     try {
       await axios.delete(`api/post/delete/${id}`).then(() => {
         router.push(`/profile/${authId}`)
@@ -91,9 +90,17 @@ export default function usePosts() {
       console.log(err)
     }
   }
-  async function postComment(data) {
+  const postComment = async (data) => {
     try {
       await axios.post('api/comment', data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  const getComments = async (id) => {
+    try {
+      const res = await axios.get(`api/comment/${id}`)
+      comments.value = res.data.comments
     } catch (err) {
       console.log(err)
     }
@@ -110,10 +117,11 @@ export default function usePosts() {
     liked,
     likeCount,
     getDashboard,
+    getMorePosts,
     createPost,
     getSpecificPost,
     deletePost,
     postComment,
-    getMorePosts
+    getComments
   }
 }

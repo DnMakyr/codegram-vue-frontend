@@ -51,7 +51,7 @@ function isLiked(val) {
                 />
                 <div class="tw-pt-2 tw-border-t-2">
                   <like-button :id="props.id" :liked="liked" @isLiked="isLiked" />
-                  <span v-if="likeCount > 0">{{ likeCount }} {{ likeCount > 1 ? "likes" : "like" }}</span>
+                  <div v-if="likeCount > 0">{{ likeCount }} {{ likeCount > 1 ? "likes" : "like" }}</div>
                 </div>
               </div>
               <div class="tw-w-full mt-auto">

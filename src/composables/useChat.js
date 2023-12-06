@@ -6,7 +6,8 @@ export const useChat = () => {
   const messages = ref({})
   const isLoading = ref(false)
   const replier = ref({})
-  async function getChats() {
+
+  const getChats = async () => {
     try {
       isLoading.value = true
       const res = await axios.get('/api/chat')
@@ -17,7 +18,7 @@ export const useChat = () => {
       isLoading.value = false
     }
   }
-  async function getMessages(id) {
+  const getMessages = async (id) => {
     try {
       isLoading.value = true
       const res = await axios.post(`/api/chat/load/${id}`)
@@ -29,7 +30,7 @@ export const useChat = () => {
       isLoading.value = false
     }
   }
-  async function sendMessage(data) {
+  const sendMessage = async (data) => {
     try {
       await axios.post(`/api/chat/send/`, data)
     } catch (err) {

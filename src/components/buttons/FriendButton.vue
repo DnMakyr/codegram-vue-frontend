@@ -1,8 +1,8 @@
 <script setup>
-import axios from 'axios'
 import { ref, computed } from 'vue'
-
+import useFriend from '../../composables/useFriend'
 const props = defineProps(['user'])
+const { sendRequest, cancelRequest, unfriend } = useFriend()
 
 const reqStat = computed(() => {
   return props.user.friendship && props.user.friendship.status === 'pending'
@@ -21,17 +21,15 @@ const buttonText = computed(() => {
 
 function action() {
   if (stat.value) {
-    axios.post(`api/friend/${props.user.id}/cancel`).then(() => {
-      stat.value = false
-    })
+    cancelRequest(props.user.id)
+    stat.value = false
   } else {
-    axios.post(`api/friend/${props.user.id}`).then(() => {
-      stat.value = true
-    })
+    sendRequest(props.user.id)
+    stat.value = true
   }
 }
-function unfriend() {
-  axios.post(`api/friend/${props.user.id}/unfriend`).then(() => {
+const doUnfriend = () => {
+  unfriend(props.user.id).then(() => {
     stat.value = false
     friendStat.value = !friendStat.value
   })
@@ -48,7 +46,7 @@ function unfriend() {
       @click="action"
     ></button>
     <button
-      class="btn btn-sm btn-outline-success"
+      class="btn btn-sm btn-outline-success dropdown-toggle"
       data-bs-toggle="dropdown"
       aria-expanded="false"
       v-else
@@ -56,7 +54,7 @@ function unfriend() {
       Friend
     </button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#" @click.prevent="unfriend">Unfriend</a></li>
+      <li class="dropdown-item tw-cursor-pointer" @click.prevent="doUnfriend">Unfriend</li>
     </ul>
   </div>
 </template>

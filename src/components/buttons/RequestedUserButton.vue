@@ -1,19 +1,21 @@
 <script setup>
 import { ref, computed } from 'vue'
 import axios from 'axios'
-
+import useFriend from '../../composables/useFriend'
 const props = defineProps(['user'])
+
+const { rejectRequest, acceptRequest } = useFriend()
 
 const stat = ref(false)
 const resState = ref()
 
 function accept() {
-  axios.post(`api/friend/${props.user.id}/accept`)
+  acceptRequest(props.user.id)
   stat.value = true
   resState.value = true
 }
 function decline() {
-  axios.post(`api/friend/${props.user.id}/decline`)
+  rejectRequest(props.user.id)
   stat.value = true
   resState.value = false
 }

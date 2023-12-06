@@ -5,7 +5,7 @@ import { useAuthStore } from '../stores/auth'
 export const useAuth = () => {
   const authStore = useAuthStore()
 
-  async function login(payload) {
+  const login = async (payload) => {
     try {
       await axios.post('api/login', payload)
       router.push('/dashboard')
@@ -14,7 +14,7 @@ export const useAuth = () => {
       console.log(err)
     }
   }
-  async function register(user) {
+  const register = async (user) => {
     try {
       await axios.post('api/register', user)
       login({ email: user.email, password: user.password })

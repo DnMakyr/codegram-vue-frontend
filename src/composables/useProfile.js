@@ -15,7 +15,7 @@ export default function useProfile() {
       'content-type': 'multipart/form-data'
     }
   }
-  async function getProfile(id) {
+  const getProfile = async (id) => {
     try {
       isLoading.value = true
       const res = await axios.get('api/profile/' + id)
@@ -33,7 +33,7 @@ export default function useProfile() {
       isLoading.value = false
     }
   }
-  async function updateProfile(id, data) {
+  const updateProfile = async (id, data) => {
     try {
       await axios
         .post(`api/profile/${id}/update`, data, config, {
@@ -51,7 +51,7 @@ export default function useProfile() {
       }
     }
   }
-  async function getFriends(id) {
+  const getFriends = async (id) => {
     try {
       isLoading.value = true
       const res = await axios.get('api/friends/' + id)
@@ -63,5 +63,15 @@ export default function useProfile() {
     }
   }
 
-  return { user, statistics, profile, posts, isLoading, friends, getProfile, updateProfile, getFriends }
+  return {
+    user,
+    statistics,
+    profile,
+    posts,
+    isLoading,
+    friends,
+    getProfile,
+    updateProfile,
+    getFriends
+  }
 }

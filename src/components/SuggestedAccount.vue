@@ -8,10 +8,9 @@ const text = computed(() => {
   return status.value ? 'Following' : 'Follow'
 })
 
-async function follow() {
-  await axios.post('/api/follow/' + props.suggestion.id).then(() => {
-    status.value = !status.value
-  })
+const follow = async () => {
+  await axios.post('/api/follow/' + props.suggestion.id)
+  status.value = !status.value
 }
 </script>
 
@@ -28,7 +27,11 @@ async function follow() {
         </div>
         <div class="tw-ml-2">{{ suggestion.username }}</div>
       </div>
-      <button :class="status ? 'tw-text-gray-400' : 'tw-text-blue-500' " @click="follow()" v-text="text"></button>
+      <button
+        :class="status ? 'tw-text-gray-400' : 'tw-text-blue-500'"
+        @click="follow()"
+        v-text="text"
+      ></button>
     </div>
   </div>
 </template>
