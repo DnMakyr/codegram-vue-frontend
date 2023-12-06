@@ -11,7 +11,6 @@ const accepted = computed(() => {
   return props.user.friendship && props.user.friendship.status === 'friend'
 })
 
-// variable for responsive UI
 const stat = ref(reqStat.value)
 const friendStat = ref(accepted.value)
 
