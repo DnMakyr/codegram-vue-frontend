@@ -9,7 +9,7 @@ const form = ref({
   password: '',
   password_confirmation: ''
 })
-const { register } = useAuth()
+const { messages,register } = useAuth()
 
 </script>
 
@@ -42,14 +42,14 @@ const { register } = useAuth()
                   class="input"
                   autocomplete="off"
                   v-model="form.password_confirmation"
-                />
-
+                  />
+                <span class="tw-text-red-500 tw-font-semibold" v-if="messages.length > 0"> {{ messages }}</span>
                 <button class="login-btn mt-4 hover:tw-brightness-90 tw-text-white tw-border-0">Sign up</button>
               </form>
             </div>
           </div>
           <p class="tw-text-center">
-            Already have an account? <RouterLink to="/" class="hover:tw-text-green-400">Sign in</RouterLink>
+            Already have an account? <RouterLink to="/" class="hover:!tw-text-green-500">Sign in</RouterLink>
           </p>
         </div>
       </div>

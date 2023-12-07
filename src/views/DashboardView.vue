@@ -5,8 +5,7 @@ import LoadingBar from '../components/LoadingBar.vue'
 import PostArticle from '../components/posts/PostArticle.vue'
 import SuggestionDiv from '../components/SuggestionDiv.vue'
 import _debounce from 'lodash/debounce'
-
-const { posts, suggestions, isLoading, getDashboard, getMorePosts } = usePosts()
+const { posts, suggestions, isLoading, loadingScroll ,getDashboard, getMorePosts } = usePosts()
 onMounted(() => {
   getDashboard()
   const debouncedGetMorePosts = _debounce(() => {
@@ -30,6 +29,7 @@ onMounted(() => {
       <div class="row tw-flex">
         <div class="col-8 tw-flex tw-flex-col tw-items-center">
           <post-article v-for="post in posts" :post="post" :key="post.id" />
+          <span v-if="loadingScroll">Loading...</span>
         </div>
         <div
           class="col-4 suggestion"

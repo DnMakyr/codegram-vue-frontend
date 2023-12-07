@@ -1,13 +1,13 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
-import { useAuth } from '@/composables/useAuth.js'
+import { useAuth } from '../../composables/useAuth.js'
 
 const form = ref({
   email: '',
   password: ''
 })
-const { login } = useAuth()
+const { messages, login } = useAuth()
 </script>
 
 <template>
@@ -29,13 +29,16 @@ const { login } = useAuth()
                 v-model="form.password"
               />
               <a class="mt-2">Forgot password?</a>
-              <button class="login-btn mt-4 hover:tw-brightness-90 tw-text-white" type="submit">Login</button>
+              <span class="tw-text-red-500 tw-text-sm tw-font-semibold" v-if="messages.length">{{ messages }}</span>
+              <button class="login-btn mt-4 hover:tw-brightness-90 tw-text-white" type="submit">
+                Login
+              </button>
             </form>
           </div>
           <div class="tw-flex mt-3 tw-flex-col tw-items-center">
             <p>
               New to Codegram?
-              <RouterLink to="/register" class="hover:!tw-text-green-600">Sign up</RouterLink>
+              <RouterLink to="/register" class="hover:!tw-text-green-500">Sign up</RouterLink>
             </p>
             Using other methods?
           </div>
@@ -97,7 +100,7 @@ label {
   font-size: 16px;
   font-weight: bold;
 }
-.card-body{
+.card-body {
   color: white !important;
 }
 </style>
