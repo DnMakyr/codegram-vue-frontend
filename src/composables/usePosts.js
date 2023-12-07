@@ -9,6 +9,7 @@ export default function usePosts() {
   const noMorePosts = ref(false)
   const suggestions = ref([])
   const isLoading = ref(false)
+  const loadingScroll = ref(false)
   const loadingComments = ref(false)
   const caption = ref('')
   const imgSrc = ref('')
@@ -34,14 +35,16 @@ export default function usePosts() {
     try {
       if (noMorePosts.value) {
         // If there are no more posts, return early
+        loadingScroll.value = false
         return
       }
-
+      loadingScroll.value = true
       page.value++
       const res = await axios.get(`api/dashboard/?page=${page.value}`)
 
       if (res.data.posts.data.length === 0) {
         // If no new posts, set the flag to true
+        loadingScroll.value = false
         noMorePosts.value = true
         return
       }
@@ -49,6 +52,9 @@ export default function usePosts() {
       posts.value = [...posts.value, ...res.data.posts.data]
     } catch (err) {
       console.log(err)
+    }
+    finally {
+      loadingScroll.value = false
     }
   }
   const createPost = async (data) => {
@@ -115,6 +121,7 @@ export default function usePosts() {
     suggestions,
     isLoading,
     loadingComments,
+    loadingScroll,
     user,
     caption,
     imgSrc,
