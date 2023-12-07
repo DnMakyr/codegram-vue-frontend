@@ -3,20 +3,7 @@ import usePosts from '../../composables/usePosts';
 
 const {deletePost} = usePosts();
 
-defineProps({
-  user: {
-    type: Object,
-    required: true
-  },
-  caption: {
-    type: String,
-    required: true
-  },
-  id: {
-    type: String,
-    required: true
-  }
-})
+defineProps(['id', 'caption', 'user']);
 </script>
 <template>
   <div>

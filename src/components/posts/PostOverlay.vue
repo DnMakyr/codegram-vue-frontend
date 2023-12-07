@@ -16,6 +16,7 @@ const {
   likeCount,
   liked,
   isLoading,
+  loadingComments,
   getSpecificPost,
   getComments
 } = usePosts()
@@ -36,7 +37,7 @@ const isLiked = (val) => {
 <template>
   <div>
     <div class="modal" @click="$emit('closeModal')">
-      <button
+      <button v-if="$route.path === '/post/' + props.id"
         type="button"
         class="btn-close tw-top-0 tw-right-0 tw-fixed"
         aria-label="Close"
@@ -59,12 +60,13 @@ const isLiked = (val) => {
                   :comments="comments"
                   :likeCount="likeCount"
                   :liked="liked"
+                  :loadingComments="loadingComments"
                 />
-                <div class="tw-pt-2 tw-border-t-2">
+                <div class="tw-pt-2 tw-border-t-2 tw-flex tw-space-x-2">
                   <like-button :id="props.id" :liked="liked" @isLiked="isLiked" />
-                  <div v-if="likeCount > 0">
+                  <span v-if="likeCount > 0" class="tw-font-bold">
                     {{ likeCount }} {{ likeCount > 1 ? 'likes' : 'like' }}
-                  </div>
+                  </span>
                 </div>
               </div>
               <div class="tw-w-full mt-auto">
