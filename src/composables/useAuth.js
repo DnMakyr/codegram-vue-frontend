@@ -26,6 +26,7 @@ export const useAuth = () => {
     axios
       .post('api/logout')
       .then(() => {
+        window.Echo.disconnect()
         sessionStorage.removeItem('authUserId')
         authStore.logOut()
         router.push({ name: 'login' })

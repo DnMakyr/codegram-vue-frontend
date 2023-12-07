@@ -1,15 +1,24 @@
 <script setup>
-import { provide } from 'vue'
+import { provide, onMounted } from 'vue'
 import ArticleBody from './ArticleBody.vue'
 import ArticleHeader from './ArticleHeader.vue'
+import usePosts from '../../composables/usePosts'
+
+const { comments, getComments } = usePosts()
+
 const props = defineProps({
   post: {
     type: Object,
     required: true
-  },
+  }
 })
 provide('post', props.post)
-
+onMounted(() => {
+  getComments(props.post.id)
+})
+const newComment = () => {
+  getComments(props.post.id)
+}
 </script>
 
 <template>
@@ -23,7 +32,7 @@ provide('post', props.post)
           style="border-radius: 5px"
         />
       </div>
-      <article-body />
+      <article-body :comments="comments" @commented="newComment" />
     </div>
   </article>
 </template>

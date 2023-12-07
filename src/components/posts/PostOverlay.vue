@@ -8,16 +8,27 @@ import CommentForm from './CommentForm.vue'
 import usePosts from '../../composables/usePosts'
 import LikeButton from '../buttons/LikeButton.vue'
 
-const { user, imgSrc, caption, comments, likeCount, liked, isLoading, getSpecificPost } = usePosts()
+const {
+  user,
+  imgSrc,
+  caption,
+  comments,
+  likeCount,
+  liked,
+  isLoading,
+  getSpecificPost,
+  getComments
+} = usePosts()
 const props = defineProps(['id'])
 
 onMounted(() => {
   getSpecificPost(props.id)
+  getComments(props.id)
 })
-function updateComments() {
-  getSpecificPost(props.id)
+const updateComments = () => {
+  getComments(props.id)
 }
-function isLiked(val) {
+const isLiked = (val) => {
   likeCount.value += val
 }
 </script>
@@ -36,7 +47,7 @@ function isLiked(val) {
         <div class="container" v-else>
           <div class="row">
             <div class="col-7 tw-flex tw-justify-center" style="max-height: 705px">
-              <div class="img-container">
+              <div class="img-container" v-if="imgSrc">
                 <img :src="'http://localhost:8000/storage/' + imgSrc" alt="" />
               </div>
             </div>
@@ -51,11 +62,13 @@ function isLiked(val) {
                 />
                 <div class="tw-pt-2 tw-border-t-2">
                   <like-button :id="props.id" :liked="liked" @isLiked="isLiked" />
-                  <div v-if="likeCount > 0">{{ likeCount }} {{ likeCount > 1 ? "likes" : "like" }}</div>
+                  <div v-if="likeCount > 0">
+                    {{ likeCount }} {{ likeCount > 1 ? 'likes' : 'like' }}
+                  </div>
                 </div>
               </div>
               <div class="tw-w-full mt-auto">
-                <comment-form @commented="updateComments" class="tw-py-2" :id="props.id" />
+                <comment-form @commented="updateComments" class="tw-py-1" :id="props.id" />
               </div>
             </div>
           </div>

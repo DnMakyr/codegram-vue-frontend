@@ -72,7 +72,6 @@ export default function usePosts() {
       user.value = res.data.post.user
       caption.value = res.data.post.caption
       imgSrc.value = res.data.post.image
-      comments.value = res.data.post.comments
       liked.value = res.data.post.liked
       likeCount.value = res.data.post.likeCount
     } catch (err) {

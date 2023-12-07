@@ -6,11 +6,11 @@ const props = defineProps(['userId'])
 async function createChat() {
     await axios.post(`api/chat/create/${props.userId}`).then((res)=>{
         if (res.data.success === 'Existed') {
-           router.push(`/chat/show/${res.data.chatId}`)
+           router.push(`/chat`)
         }
         else {
-            // router.push(`/chat/show/${res.data.newChatId}`)
-            console.log(res.data.newChatId)
+            router.push(`/chat`)
+           
         }
     })
 }

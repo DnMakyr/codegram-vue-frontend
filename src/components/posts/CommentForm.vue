@@ -51,6 +51,7 @@ const submitForm = () => {
   <div>
     <form @submit.prevent="submitForm">
       <textarea
+        class="focus:tw-outline tw-outline-blue-400"
         v-model="formData.comment"
         @input="adjustTextarea"
         @keydown.enter.prevent="handleEnterKey"

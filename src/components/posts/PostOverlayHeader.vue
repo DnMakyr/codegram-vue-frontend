@@ -13,7 +13,7 @@ defineProps({
     required: true
   },
   id: {
-    type: Number,
+    type: String,
     required: true
   }
 })
@@ -21,8 +21,8 @@ defineProps({
 <template>
   <div>
     <div class="tw-flex tw-pb-2">
-      <div class="tw-flex tw-items-center tw-space-x-1 tw-flex-grow">
-        <img
+      <div class="tw-flex tw-items-center tw-space-x-1 tw-flex-grow" >
+        <img v-if="user.profile?.image"
           :src="'http://localhost:8000/storage/' + user.profile?.image"
           alt=""
           class="tw-rounded-full tw-h-9 tw-w-9 tw-object-cover"

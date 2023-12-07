@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="tw-border-t-2 tw-overflow-auto" style="max-height: 32rem; min-height: 32rem;">
+  <div class="tw-border-t-2 tw-overflow-auto" style="max-height: 32rem; min-height: 32rem">
     <div class="tw-flex tw-items-center tw-py-1" v-for="(comment, index) in comments" :key="index">
       <div class="tw-flex tw-items-center">
         <img
