@@ -9,6 +9,7 @@ export default function usePosts() {
   const noMorePosts = ref(false)
   const suggestions = ref([])
   const isLoading = ref(false)
+  const loadingComments = ref(false)
   const caption = ref('')
   const imgSrc = ref('')
   const user = ref({})
@@ -98,10 +99,14 @@ export default function usePosts() {
   }
   const getComments = async (id) => {
     try {
+      loadingComments.value = true
       const res = await axios.get(`api/comment/${id}`)
       comments.value = res.data.comments
     } catch (err) {
       console.log(err)
+    }
+    finally {
+      loadingComments.value = false
     }
   }
   return {
@@ -109,6 +114,7 @@ export default function usePosts() {
     page,
     suggestions,
     isLoading,
+    loadingComments,
     user,
     caption,
     imgSrc,
